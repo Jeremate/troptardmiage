@@ -1,6 +1,6 @@
 troptardmiage
 =============
-
+https://troptardmiage.appspot.com
 Projet M1 Miage en AngularJS et services REST via Google App Engine en Java
 
 ## Products
@@ -13,7 +13,7 @@ Projet M1 Miage en AngularJS et services REST via Google App Engine en Java
 - [Google Cloud Endpoints][3]
 - [Google App Engine Maven plugin][4]
 
-## Setup Instructions
+## Setup Instructions after generating maven endpoint-skeleton archetype
 
 1. Update the value of `application` in `appengine-web.xml` to the app
    ID you have registered in the App Engine admin console and would
@@ -57,10 +57,10 @@ Utilisation de gitflow pour gérer les versions et le workflow
 
 ### Prérequis
 - Java 1.7
-- Maven (mvn en ligne de commande), version 3
+- [Maven][7] (mvn en ligne de commande), version 3
 - git : gestionnaire de versions
 - gitflow : gestionnaire de workflows sous git
-- npm : gestionnaire de paquets nodejs
+- npm : gestionnaire de paquets nodejs _uniquement utilisé pour installer bower_
 - bower : gestionnaire de paquets frontend
 
 ### Frontend
@@ -79,3 +79,4 @@ _Exemple : bower install angular_
 [4]: https://developers.google.com/appengine/docs/java/tools/maven
 [5]: https://localhost:8080/_ah/api/explorer
 [6]: https://console.developers.google.com/
+[7]: https://cloud.google.com/appengine/docs/java/tools/maven
