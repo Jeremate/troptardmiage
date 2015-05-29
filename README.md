@@ -1,7 +1,7 @@
-endpoints-skeleton
-==================
+troptardmiage
+=============
 
-A skeleton application for Google Cloud Endpoints in Java.
+Projet M1 Miage en AngularJS et services REST via Google App Engine en Java
 
 ## Products
 - [App Engine][1]
@@ -48,6 +48,30 @@ A skeleton application for Google Cloud Endpoints in Java.
 1. Deploy your application to Google App Engine with
 
    $ mvn appengine:update
+
+## Architecture
+Backend : Google App Engine
+Frontend : AngularJS
+
+Utilisation de gitflow pour gérer les versions et le workflow
+
+### Prérequis
+- Java 1.7
+- Maven (mvn en ligne de commande), version 3
+- git : gestionnaire de versions
+- gitflow : gestionnaire de workflows sous git
+- npm : gestionnaire de paquets nodejs
+- bower : gestionnaire de paquets frontend
+
+### Frontend
+Installation de librairies à l'aide de l'outil bower.
+_Exemple : bower install angular_
+
+## Installation et test en local
+- Cloner le repo : git clone https://github.com/jeremate/troptardmiage.git
+- Se déplacer sur la branche develop : git checkout develop
+- mvn clean install
+- mvn appengine:devserver
 
 [1]: https://developers.google.com/appengine
 [2]: http://java.com/en/
