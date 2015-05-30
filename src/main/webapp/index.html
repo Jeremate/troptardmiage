@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/troptardmiage.css">
-    <title>Accueil | TropTardMiage</title>
+    <title>TropTardMiage</title>
   </head>
 
   <body ng-app="troptardmiage" ng-controller="MainCtrl">
     <nav class="navbar navbar-inverse ">
       <div class="container-fluid">
         <a class="navbar-brand text-center" style="position: absolute;width: 100%; margin: auto; left: 0; top: 0" href="#">TropTardMiage</p>
-        <div class="navbar-collapse">
+        <div class="navbar-collapse" ng-show="signedIn">
           <ul class="nav navbar-nav pull-left">
             <li><a href="#"><span class="glyphicon glyphicon-wrench"></span> Préférences</a></li>
           </ul>
@@ -24,10 +24,14 @@
     </nav>
 
     <div class="container-fluid">
-      <div class="jumbotron">
-        <h1>Hello App Engine!</h1>
+      <div class="jumbotron text-center">
+        <h1>Bienvenue sur l'application TropTard !</h1>
+        <p>Le principe est simple, plus vous manquez vos événements favoris, plus vous gagnez !</p>
+        <p>Ne perdez plus de temps, inscrivez-vous !</p> 
+        <button type="button" class="btn btn-default" id="signinButton" ng-click="auth()">Se connecter</button>
 
         <div ng-view=""></div>
+
       </div>
     </div>
 

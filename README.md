@@ -49,11 +49,14 @@ _Exemple :_
 - Build le projet : `mvn clean install`
 - Tester l'app en local : `mvn appengine:devserver` disponible à [localhost:8080/_ah/api/explorer][5]
 
+### Importer le projet sous Eclipse
+TODO
+
 [1]: https://developers.google.com/appengine
 [2]: http://java.com/en/
 [3]: https://developers.google.com/appengine/docs/java/endpoints/
 [4]: https://developers.google.com/appengine/docs/java/tools/maven
-[5]: https://localhost:8080/_ah/api/explorer
+[5]: http://localhost:8080/_ah/api/explorer
 [6]: https://console.developers.google.com/
 [7]: https://cloud.google.com/appengine/docs/java/tools/maven
 [8]: https://angularjs.org

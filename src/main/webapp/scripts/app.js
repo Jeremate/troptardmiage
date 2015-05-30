@@ -5,11 +5,11 @@ angular.module('troptardmiage', [
 	])
 	.config(function ($routeProvider) {
 		$routeProvider
-			.when('/main', {
+			.when('/', {
 				templateUrl: '../views/main.html',
 				controller: 'MainCtrl'
 			})
 			.otherwise({
-				redirectTo: '/main'
+				redirectTo: '/'
 			});
 	});
