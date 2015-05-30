@@ -1,13 +1,14 @@
 troptardmiage
 =============
 https://troptardmiage.appspot.com
+
 Projet M1 Miage en AngularJS et services REST via Google App Engine en Java
 
 ## Use Case
-1) L'utilisateur renseigne ses préférences d'événements
-2) Au moment d'un événement, le système le notifie et lui demande sa position
-3) Le système garde une trace des événements assistés et non assistés
-4) Le système établie un classement des meilleurs losers
+1. L'utilisateur renseigne ses préférences d'événements
+2. Au moment d'un événement, le système le notifie et lui demande sa position
+3. Le système garde une trace des événements assistés et non assistés
+4. Le système établie un classement des meilleurs losers
 
 ## Products
 - [App Engine][1]
@@ -19,9 +20,11 @@ Projet M1 Miage en AngularJS et services REST via Google App Engine en Java
 ## APIs
 - [Google Cloud Endpoints][3]
 - [Google App Engine Maven plugin][4]
+- [Sorties et loisirs en Loire-Atlantique][11]
 
 ## Architecture
 Backend : Google App Engine via services REST créés en Java
+
 Frontend : AngularJS
 
 ### Prérequis
@@ -56,3 +59,4 @@ _Exemple :_
 [8]: https://angularjs.org
 [9]: https://www.npmjs.com/
 [10]: https://www.npmjs.com/package/bower
+[11]: http://api.loire-atlantique.fr/
