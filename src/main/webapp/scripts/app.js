@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('troptardmiage', [
-	'ngRoute'
+	'ngRoute', 'ui.bootstrap'
 	])
 	.config(function ($routeProvider) {
 		$routeProvider
