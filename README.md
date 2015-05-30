@@ -39,9 +39,9 @@ Frontend : AngularJS
 Installation de librairies à l'aide de l'outil bower.
 
 _Exemple :_
-    _- Se placer dans le dossier `src/main/webapp`_ 
-    _- Puis exécuter : `bower install nom\_lib_`
-    _- La librairie est installée dans le dossier `bower_components`_
+* _Se placer dans le dossier `src/main/webapp`_ 
+* _Puis exécuter : `bower install nom\_lib`_
+* _La librairie est installée dans le dossier `bower_components`_
 
 ## Installation et test en local
 - Cloner le repo : `git clone https://github.com/jeremate/troptardmiage.git`
