@@ -9,30 +9,11 @@
   </head>
 
   <body ng-app="troptardmiage" ng-controller="MainCtrl">
-    <nav class="navbar navbar-inverse ">
-      <div class="container-fluid">
-        <a class="navbar-brand text-center" style="position: absolute;width: 100%; margin: auto; left: 0; top: 0" href="#">TropTardMiage</p>
-        <div class="navbar-collapse" ng-show="signedIn">
-          <ul class="nav navbar-nav pull-left">
-            <li><a href="#"><span class="glyphicon glyphicon-wrench"></span> Préférences</a></li>
-          </ul>
-          <ul class="nav navbar-nav pull-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profil</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
+    <div ui-view="navbar-main"></div>
     <div class="container-fluid">
-      <div class="jumbotron text-center">
-        <h1>Bienvenue sur l'application TropTard !</h1>
-        <p>Le principe est simple, plus vous manquez vos événements favoris, plus vous gagnez !</p>
-        <p>Ne perdez plus de temps, inscrivez-vous !</p> 
-        <button type="button" class="btn btn-default" id="signinButton" ng-click="auth()">Se connecter</button>
+      
+        <div ui-view></div>
 
-        <div ng-view=""></div>
-
-      </div>
     </div>
 
     <footer class="footer">
@@ -45,9 +26,9 @@
     </div>
     <!-- JS from bower -->
     <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/angular-route/angular-route.min.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <!-- JS from troptardmiage -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>

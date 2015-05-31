@@ -1,8 +1,7 @@
 'use strict';
 
-angular.module('troptardmiage', [])
-	.controller('MainCtrl', ['$scope', '$window', function($scope, $window){
-		$scope.is_backend_ready = false;
+	ttmApp.controller('MainCtrl', ['$scope', '$window', '$state', function($scope, $window, $state){
+		$scope.isBackendReady = false;
 		
 		var CLIENT_ID = "679411653009-62udgm0l3010dqbhon9lrff7pcqldrg9.apps.googleusercontent.com";
 		var SCOPES = "https://www.googleapis.com/auth/userinfo.email";
@@ -29,8 +28,8 @@ angular.module('troptardmiage', [])
 		    	var rootApi = $window.location.origin + '/_ah/api';//TODO : vérifier si en prod ok sinon changer vers troptardmiage.appspot.com
 		        gapi.client.load('troptardmiage', 'v1', function() {
 		            console.log("troptardmiage api loaded");
-		            //le flag is_backend_ready permet d'éviter d'appeler gapi avant qu'elle soit chargée
-		            $scope.is_backend_ready = true;
+		            //le flag isBackendReady permet d'éviter d'appeler gapi avant qu'elle soit chargée
+		            $scope.isBackendReady = true;
 		            loadCallback();
 		        }, rootApi);
 		    };
@@ -57,7 +56,12 @@ angular.module('troptardmiage', [])
 				if (!resp.code) {
 					console.log("authentification réussie");
 					$scope.signedIn = true;
-				  // User is signed in, call my Endpoint
+				  // User is signed in, redirect to events
+				  	$state.go("events");
+				} else {
+					//User is not signed in, redirect to main
+					console.log("User not signed in");
+					$state.go("main");
 				}
 			});
 	    }
@@ -67,7 +71,7 @@ angular.module('troptardmiage', [])
 	    		signin(false, userAuthed);
 	    	} else {
 	    		$scope.signedIn = false;
-	    		document.getElementById('signinButton').innerHTML = 'Se connecter';
+	    		$state.go("main");
 	    	}
 	    }
 	}]);
