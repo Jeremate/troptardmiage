@@ -38,9 +38,11 @@ Frontend : AngularJS
 ### Frontend
 Installation de librairies à l'aide de l'outil bower.
 
+Le fichier bower.json renseigne sur les dépendances de l'app. Il se met à jour à chaque install en précisant l'option `--save`.
+
 _Exemple :_
 * _Se placer dans le dossier `src/main/webapp`_ 
-* _Puis exécuter : `bower install nom\_lib`_
+* _Puis exécuter : `bower install nom_lib --save`_
 * _La librairie est installée dans le dossier `bower_components`_
 
 ## Installation et test en local
