@@ -38,7 +38,7 @@ Frontend : AngularJS
 ### Frontend
 Installation de librairies à l'aide de l'outil bower.
 
-Le fichier bower.json renseigne sur les dépendances de l'app. Il se met à jour à chaque install en précisant l'option `--save`.
+Le fichier bower.json renseigne sur les dépendances de l'app. Il se met à jour à chaque install en précisant l'option `--save`. Il permet aussi d'éviter de partager le dossier bower_components qui peut devenir volumineux.
 
 _Exemple :_
 * _Se placer dans le dossier `src/main/webapp`_ 
@@ -48,11 +48,19 @@ _Exemple :_
 ## Installation et test en local
 - Cloner le repo : `git clone https://github.com/jeremate/troptardmiage.git`
 - Se déplacer sur la branche develop : `git checkout develop`
+- Télécharger les dépendances de la webapp : `cd src/main/webapp ; bower install`
+- Revenir à la racine du projet : `cd ../../../`
 - Build le projet : `mvn clean install`
 - Tester l'app en local : `mvn appengine:devserver` disponible à [localhost:8080/_ah/api/explorer][5]
 
 ### Importer le projet sous Eclipse
-TODO
+- Dans la fenêtre "Project Explorer", cliquer-droit > Import > Import.
+- Une nouvelle fenêtre apparait, choisir "Git > Projects from Git".
+- Cliquer sur "Next" puis "Existing local repository".
+- Soit le projet apparait dans la liste, soit il faut l'ajouter via le bouton "Add" puis cliquer sur "Next".
+- Dans la liste de sélection, choisir "Import as general project" puis cliquer sur "Finish".
+
+_Si Eclipse a rajouté des fichiers (.project, .classpath, etc...), spécifier à Git de ne pas les inclure dans le .gitignore_
 
 [1]: https://developers.google.com/appengine
 [2]: http://java.com/en/
