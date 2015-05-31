@@ -2,3 +2,4 @@
 .project
 TODO.md
 target/
+src/main/webapp/bower_components/
