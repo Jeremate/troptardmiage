@@ -1,5 +1,7 @@
 .DS_Store
 .project
+.classpath
+.settings
 TODO.md
 target/
 src/main/webapp/bower_components/
