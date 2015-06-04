@@ -1,14 +1,15 @@
 troptardmiage
 =============
-https://troptardmiage.appspot.com
+[Application TropTardMiage][0]
 
 Projet M1 Miage en AngularJS et services REST via Google App Engine en Java
 
 ## Use Case
-1. L'utilisateur renseigne ses préférences d'événements
-2. Au moment d'un événement, le système le notifie et lui demande sa position
-3. Le système garde une trace des événements assistés et non assistés
-4. Le système établie un classement des meilleurs losers
+1. L'utilisateur renseigne ses thèmes favoris
+2. Une liste d'événements lui est proposé pour lesquels il peut s'inscrire
+3. Au moment d'un événement, le système le notifie et lui demande sa position
+4. Le système garde une trace des événements assistés
+5. Le système établie un classement des meilleurs losers
 
 ## Products
 - [App Engine][1]
@@ -62,6 +63,7 @@ _Exemple :_
 
 _Si Eclipse a rajouté des fichiers (.project, .classpath, etc...), spécifier à Git de ne pas les inclure dans le .gitignore_
 
+[0]: https://troptardmiage.appspot.com
 [1]: https://developers.google.com/appengine
 [2]: http://java.com/en/
 [3]: https://developers.google.com/appengine/docs/java/endpoints/
