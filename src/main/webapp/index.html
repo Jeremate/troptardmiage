@@ -9,9 +9,14 @@
   </head>
 
   <body ng-app="troptardmiage" ng-controller="MainCtrl">
-    <div ui-view="navbar-main"></div>
+    <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+      <div class="container-fluid">
+        <a class="navbar-brand text-center" style="position: absolute;width: 100%; margin: auto; left: 0; top: 0" href="#">TropTardMiage</a>
+        <div ui-view="navbar-user"></div>
+      </div>
+    </header>
     <div class="container-fluid">
-      
+
         <div ui-view></div>
 
     </div>
@@ -23,7 +28,7 @@
         <p class="pull-right"><span class="glyphicon glyphicon-heart"></span><a href="https://github.com/jeremate/troptardmiage"> Lien GitHub</a></p>
       </div>
     </footer>
-      
+
     </div>
     <!-- JS from bower -->
     <script src="bower_components/angular/angular.min.js"></script>
@@ -34,7 +39,7 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/services/opendataapi.js"></script>
-    
+
     <script>
       var init = function() {
         console.log("init called");

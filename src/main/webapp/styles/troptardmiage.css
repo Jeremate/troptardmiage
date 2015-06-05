@@ -2,7 +2,11 @@ footer {
 	background-color: #f5f5f5;
     bottom: 0;
     height: 50px;
-    position: absolute;
+    position: relative;
     width: 100%;
     padding-top: 10px;
+}
+
+body {
+    padding-top: 70px;
 }

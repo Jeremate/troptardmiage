@@ -13,9 +13,6 @@ ttmApp.config(function ($stateProvider, $urlRouterProvider) {
        views: {
          '': {
             templateUrl: 'views/main.html'
-         },
-         'navbar-main@': {
-            templateUrl: 'views/navbarmain.html'
          }
        }
     })
@@ -23,13 +20,10 @@ ttmApp.config(function ($stateProvider, $urlRouterProvider) {
     .state('events', {
        url: '/events',
        views: {
-            '': { 
-                templateUrl: 'views/events.html' 
+            '': {
+                templateUrl: 'views/events.html'
             },
-            'navbar-main@': {
-                templateUrl: 'views/navbarmain.html'
-            },
-            'navbar-user@events': {
+            'navbar-user': {
                 templateUrl: 'views/navbaruser.html'
             }
         }
