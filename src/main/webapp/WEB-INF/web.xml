@@ -4,7 +4,7 @@
         <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
         <init-param>
             <param-name>services</param-name>
-            <param-value/>
+            <param-value>fr.miagenantes.troptardmiage.entities.EventEndpoint,fr.miagenantes.troptardmiage.entities.ThemeEndpoint,fr.miagenantes.troptardmiage.entities.UserTtmEndpoint</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

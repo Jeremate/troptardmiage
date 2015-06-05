@@ -1,4 +1,4 @@
-package fr.miagenantes.troptardmiage.entities;
+package fr.miagenantes.troptardmiage.model;
 
 import java.util.Date;
 
