@@ -1,40 +1,48 @@
-package fr.miagenantes.troptardmiage.model;
+package fr.miagenantes.troptardmiage.models;
 
 import java.util.Date;
 
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
-
+import com.googlecode.objectify.Ref;
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.annotation.Load;
 import com.google.appengine.api.datastore.GeoPt;
 
-@PersistenceCapable(identityType=IdentityType.APPLICATION)
+@Entity
 public class Event {
-	@PrimaryKey
-	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-	private Long Id;
-	@Persistent
+	@Id
+	private Long id;
+	@Index
 	private String eventId;
-	@Persistent
 	private String title;
-	@Persistent
-	private Long theme;
-	@Persistent
+	@Load
+	private Ref<Theme> theme;
 	private Date startDate;
-	@Persistent
 	private Date endDate;
-	@Persistent
 	private String city;
-	@Persistent
 	private GeoPt geoPt;//latitude, longitude
-	
+
+	//constructors
+	public Event() {} //must have no-arg constructor in Objectify
+	public Event(Long id, String eventId, String title, Theme theme,
+			Date startDate, Date endDate, String city, GeoPt geoPt) {
+		this.id = id;
+		this.eventId = eventId;
+		this.title = title;
+		this.theme = Ref.create(theme);
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.city = city;
+		this.geoPt = geoPt;
+	}
+
+	//getters and setters
 	public Long getId() {
-		return Id;
+		return id;
 	}
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 	public String getEventId() {
 		return eventId;
@@ -48,11 +56,11 @@ public class Event {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Long getTheme() {
-		return theme;
+	public Theme getTheme() {
+		return theme.get();
 	}
-	public void setTheme(Long theme) {
-		this.theme = theme;
+	public void setTheme(Theme theme) {
+		this.theme = Ref.create(theme);
 	}
 	public Date getStartDate() {
 		return startDate;
@@ -78,5 +86,5 @@ public class Event {
 	public void setGeoPt(GeoPt geoPt) {
 		this.geoPt = geoPt;
 	}
-	
+
 }

@@ -60,6 +60,7 @@ _Exemple :_
 - Cliquer sur "Next" puis "Existing local repository".
 - Soit le projet apparait dans la liste, soit il faut l'ajouter via le bouton "Add" puis cliquer sur "Next".
 - Dans la liste de sélection, choisir "Import as general project" puis cliquer sur "Finish".
+- Enfin cliquer-droit sur le projet > Configure > Convert to Maven Project
 
 _Si Eclipse a rajouté des fichiers (.project, .classpath, etc...), spécifier à Git de ne pas les inclure dans le .gitignore_
 

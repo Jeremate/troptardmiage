@@ -94,4 +94,14 @@
 		    	});
 	    }
 
+	    $scope.loadUsers = function() {
+	    	console.log("themes");
+	    	gapi.client.troptardmiage.users.losers().execute(function(res) {
+	    		console.log(res);
+	    		if(!res.code) {
+	    			console.log("in !res.code");
+	    		}
+	    	})
+	    }
+
 	}]);
