@@ -25,9 +25,8 @@ public class Event {
 
 	//constructors
 	public Event() {} //must have no-arg constructor in Objectify
-	public Event(Long id, String eventId, String title, Theme theme,
+	public Event(String eventId, String title, Theme theme,
 			Date startDate, Date endDate, String city, GeoPt geoPt) {
-		this.id = id;
 		this.eventId = eventId;
 		this.title = title;
 		this.theme = Ref.create(theme);

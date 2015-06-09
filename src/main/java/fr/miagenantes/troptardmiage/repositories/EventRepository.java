@@ -6,6 +6,7 @@ import com.googlecode.objectify.ObjectifyService;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 import fr.miagenantes.troptardmiage.models.Event;
+import fr.miagenantes.troptardmiage.models.Theme;
 
 public class EventRepository {
     private static EventRepository eventRepository = null;
@@ -31,4 +32,13 @@ public class EventRepository {
     public Event getByEventId(String eventId) {
     	return ofy().load().type(Event.class).filter("eventId", eventId).first().now();
     }
+
+	public Event create(Event event) {
+		Event existingEvent = getByEventId(event.getEventId());
+    	
+    	if(existingEvent == null) {
+    		ofy().save().entity(event).now();
+    	}
+    	return event;
+	}
 }

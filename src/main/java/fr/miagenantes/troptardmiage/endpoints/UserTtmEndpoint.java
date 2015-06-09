@@ -1,5 +1,6 @@
 package fr.miagenantes.troptardmiage.endpoints;
 
+import java.text.ParseException;
 import java.util.Collection;
 import java.util.List;
 
@@ -34,8 +35,7 @@ public class UserTtmEndpoint {
 		if(user == null) {
 			throw new OAuthRequestException(authMessage);
 		}
-		//TODO : make it return the real losers
-		return UserTtmRepository.getInstance().list();
+		return UserTtmRepository.getInstance().losers();
 	}
 
 	@ApiMethod(
@@ -87,5 +87,24 @@ public class UserTtmEndpoint {
 		}
 		return UserTtmRepository.getInstance()
 				.addTheme(user.getUserId(), new Theme(themeId, name, linkIcon));
+	}
+	
+	@ApiMethod(
+		name = "users.subscribe",
+		path = "users/events",
+		httpMethod = HttpMethod.POST
+	)
+	public UserTtm subscribe(User user, @Named("eventId") String eventId,
+			@Named("title") String title, @Named("themeId") String themeId,
+			@Named("startDate") String startDate,
+			@Named("endDate") String endDate, @Named("city") String city,
+			@Named("latitude") Float latitude,
+			@Named("longitude") Float longitude) throws OAuthRequestException, ParseException {
+		if (user == null) {
+			throw new OAuthRequestException(authMessage);
+		}
+		return UserTtmRepository.getInstance().subscribe(user.getUserId(),
+				eventId, title, themeId, startDate, endDate, city, latitude,
+				longitude);
 	}
 }

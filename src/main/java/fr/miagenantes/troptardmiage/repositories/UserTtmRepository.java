@@ -1,13 +1,28 @@
 package fr.miagenantes.troptardmiage.repositories;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
+import com.google.appengine.api.datastore.GeoPt;
+import com.google.common.base.Functions;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Ordering;
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.Ref;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
+import fr.miagenantes.troptardmiage.models.Event;
 import fr.miagenantes.troptardmiage.models.Theme;
 import fr.miagenantes.troptardmiage.models.UserTtm;
-import static com.googlecode.objectify.ObjectifyService.ofy;
+
 
 public class UserTtmRepository {
 	private static UserTtmRepository userTtmRepository = null;
@@ -30,8 +45,27 @@ public class UserTtmRepository {
         return ofy().load().type(UserTtm.class).id(id).now();
     }
     
-    public List<UserTtm> list() {
+    public List<UserTtm> losers() {
         List<UserTtm> userTtms = ofy().load().type(UserTtm.class).list();
+        Map<Long, Boolean> events;
+        Map<UserTtm, Double> classement = new HashMap<UserTtm, Double>();//<user, counter>
+        Integer missedEvt;
+        Integer totalEvt;
+
+        //comptage du nombre d'événements ratés
+        for(UserTtm user : userTtms) {
+        	events = user.getSubscriptions();
+        	missedEvt = 0;
+        	totalEvt = events.size();
+        	for(Map.Entry<Long, Boolean> event : events.entrySet()) {
+        		if(!event.getValue()) {
+        			missedEvt++;
+        		}
+        	}
+        	classement.put(user, ((double) missedEvt/totalEvt));
+        }
+        //TODO : ordonner le classement
+        
         return userTtms;
     }
 
@@ -66,4 +100,23 @@ public class UserTtmRepository {
     	UserTtm user = get(userId);
     	return ThemeRepository.getInstance().listByIds(user.getThemes());
     }
+
+	public UserTtm subscribe(String userId, String eventId, String title,
+			String themeId, String startDate, String endDate, String city,
+			Float latitude, Float longitude) throws ParseException {
+		UserTtm userTtm = get(userId);
+		Theme theme = ThemeRepository.getInstance().getByThemeId(themeId);
+		//format received dd-MM-yy
+		String pattern = "dd-MM-yy";
+		Date start = new SimpleDateFormat(pattern).parse(startDate);
+		Date end = new SimpleDateFormat(pattern).parse(endDate);
+		Event evt = EventRepository.getInstance().create(new Event(eventId, title, theme, start, end, city, new GeoPt(latitude, longitude)));
+		//save user's will to attend to this event
+		userTtm.getSubscriptions().put(evt.getId(), Boolean.FALSE);
+		//save Event ID into the list of themes
+		theme.getEvents().add(evt.getId());
+		
+		return userTtm;
+	}
+ 
 }
