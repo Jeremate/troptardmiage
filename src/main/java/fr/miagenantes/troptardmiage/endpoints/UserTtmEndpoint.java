@@ -107,4 +107,16 @@ public class UserTtmEndpoint {
 				eventId, title, themeId, startDate, endDate, city, latitude,
 				longitude);
 	}
+	
+	@ApiMethod(
+		name = "users.unsubscribe",
+		path = "users/events/{eventId}",
+		httpMethod = HttpMethod.DELETE
+	)
+	public UserTtm unsubscribe(User user, @Named("eventId") String eventId) throws OAuthRequestException {
+		if (user == null) {
+			throw new OAuthRequestException(authMessage);
+		}
+		return UserTtmRepository.getInstance().unsubscribe(user.getUserId(), eventId);
+	}
 }

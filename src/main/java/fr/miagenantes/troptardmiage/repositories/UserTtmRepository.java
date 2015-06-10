@@ -93,6 +93,10 @@ public class UserTtmRepository {
     	userTtm.getThemes().add(theme.getId());
     	//assign the user ID to the theme's users list
     	theme.getUsers().add(userId);
+    	
+    	ofy().save().entity(theme).now();
+    	ofy().save().entity(userTtm).now();
+    	
     	return userTtm;
     }
     
@@ -115,6 +119,19 @@ public class UserTtmRepository {
 		userTtm.getSubscriptions().put(evt.getId(), Boolean.FALSE);
 		//save Event ID into the list of themes
 		theme.getEvents().add(evt.getId());
+		
+		ofy().save().entity(userTtm).now();
+		ofy().save().entity(theme).now();
+		
+		return userTtm;
+	}
+	
+	public UserTtm unsubscribe(String userId, String eventId) {
+		UserTtm userTtm = get(userId);
+		Event evt = EventRepository.getInstance().getByEventId(eventId);
+		userTtm.getSubscriptions().remove(evt.getId());
+		
+		ofy().save().entity(userTtm).now();
 		
 		return userTtm;
 	}
