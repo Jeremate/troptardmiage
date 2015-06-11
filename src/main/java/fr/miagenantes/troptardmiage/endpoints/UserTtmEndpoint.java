@@ -2,7 +2,7 @@ package fr.miagenantes.troptardmiage.endpoints;
 
 import java.text.ParseException;
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
@@ -31,7 +31,7 @@ public class UserTtmEndpoint {
 		path = "users/losers",
 		httpMethod = HttpMethod.GET
 	)
-	public List<UserTtm> losers(User user) throws OAuthRequestException {
+	public Set<UserTtm> losers(User user) throws OAuthRequestException {
 		if(user == null) {
 			throw new OAuthRequestException(authMessage);
 		}

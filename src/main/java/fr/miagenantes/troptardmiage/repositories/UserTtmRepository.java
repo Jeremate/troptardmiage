@@ -3,25 +3,21 @@ package fr.miagenantes.troptardmiage.repositories;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedMap;
+import java.util.Set;
 import java.util.TreeMap;
 
 import com.google.appengine.api.datastore.GeoPt;
-import com.google.common.base.Functions;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Ordering;
 import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.Ref;
-
 import static com.googlecode.objectify.ObjectifyService.ofy;
 import fr.miagenantes.troptardmiage.models.Event;
 import fr.miagenantes.troptardmiage.models.Theme;
 import fr.miagenantes.troptardmiage.models.UserTtm;
+import fr.miagenantes.troptardmiage.utils.ValueComparator;
 
 
 public class UserTtmRepository {
@@ -45,10 +41,12 @@ public class UserTtmRepository {
         return ofy().load().type(UserTtm.class).id(id).now();
     }
     
-    public List<UserTtm> losers() {
+    public Set<UserTtm> losers() {
         List<UserTtm> userTtms = ofy().load().type(UserTtm.class).list();
         Map<Long, Boolean> events;
-        Map<UserTtm, Double> classement = new HashMap<UserTtm, Double>();//<user, counter>
+        Map<UserTtm, Double> classement = new HashMap<UserTtm, Double>();//<user, ratio>
+        Comparator<UserTtm> comparator = new ValueComparator<UserTtm, Double>(classement);
+        Map<UserTtm, Double> classementTrie = new TreeMap<UserTtm, Double>(comparator);
         Integer missedEvt;
         Integer totalEvt;
 
@@ -64,9 +62,9 @@ public class UserTtmRepository {
         	}
         	classement.put(user, ((double) missedEvt/totalEvt));
         }
-        //TODO : ordonner le classement
+        classementTrie.putAll(classement);
         
-        return userTtms;
+        return classementTrie.keySet();
     }
 
     public UserTtm create(UserTtm userTtm) {
