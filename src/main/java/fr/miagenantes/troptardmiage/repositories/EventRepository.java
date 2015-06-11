@@ -6,7 +6,6 @@ import com.googlecode.objectify.ObjectifyService;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 import fr.miagenantes.troptardmiage.models.Event;
-import fr.miagenantes.troptardmiage.models.Theme;
 
 public class EventRepository {
     private static EventRepository eventRepository = null;

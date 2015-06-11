@@ -113,7 +113,7 @@ public class UserTtmRepository {
 		Date start = new SimpleDateFormat(pattern).parse(startDate);
 		Date end = new SimpleDateFormat(pattern).parse(endDate);
 		Event evt = EventRepository.getInstance().create(new Event(eventId, title, theme, start, end, city, new GeoPt(latitude, longitude)));
-		//save user's will to attend to this event
+		//save user's will to go to this event
 		userTtm.getSubscriptions().put(evt.getId(), Boolean.FALSE);
 		//save Event ID into the list of themes
 		theme.getEvents().add(evt.getId());

@@ -25,7 +25,7 @@ import fr.miagenantes.troptardmiage.repositories.UserTtmRepository;
 public class UserTtmEndpoint {
 
 	private String authMessage = "Login is required";
-	
+
 	@ApiMethod(
 		name = "users.losers",
 		path = "users/losers",
@@ -49,7 +49,7 @@ public class UserTtmEndpoint {
 		}
 		return UserTtmRepository.getInstance().get(user.getUserId());
 	}
-	
+
 	@ApiMethod(
 		name = "users.create",
 		path = "users",
@@ -61,7 +61,7 @@ public class UserTtmEndpoint {
 		}
 		return UserTtmRepository.getInstance().create(new UserTtm(user));
 	}
-	
+
 	@ApiMethod(
 		name = "users.themes",
 		path = "users/themes",
@@ -73,7 +73,7 @@ public class UserTtmEndpoint {
 		}
 		return UserTtmRepository.getInstance().getThemes(user.getUserId());
 	}
-	
+
 	@ApiMethod(
 		name = "users.addTheme",
 		path = "users/themes",
@@ -88,7 +88,7 @@ public class UserTtmEndpoint {
 		return UserTtmRepository.getInstance()
 				.addTheme(user.getUserId(), new Theme(themeId, name, linkIcon));
 	}
-	
+
 	@ApiMethod(
 		name = "users.subscribe",
 		path = "users/events",
@@ -107,7 +107,7 @@ public class UserTtmEndpoint {
 				eventId, title, themeId, startDate, endDate, city, latitude,
 				longitude);
 	}
-	
+
 	@ApiMethod(
 		name = "users.unsubscribe",
 		path = "users/events/{eventId}",

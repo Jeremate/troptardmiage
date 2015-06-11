@@ -11,7 +11,13 @@
   <body ng-app="troptardmiage" ng-controller="MainCtrl">
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
       <div class="container-fluid">
-        <a class="navbar-brand text-center" style="position: absolute;width: 100%; margin: auto; left: 0; top: 0" href="#">TropTardMiage</a>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-user" id="nav-mobile">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand text-center" style="position: absolute;width: 100%; margin: auto; left: 0; top: 0" href="#">Trop Tard</a>
         <div ui-view="navbar-user"></div>
       </div>
     </header>
