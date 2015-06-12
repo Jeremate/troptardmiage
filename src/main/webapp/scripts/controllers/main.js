@@ -1,8 +1,8 @@
 'use strict';
 
 	ttmApp.controller('MainCtrl', [
-		'$scope', '$window', '$state', '$http', 'openDataApi', function($scope, $window, $state, $http, openDataApi){
-		$scope.isBackendReady = false;
+		'$scope', '$window', '$state', 'openDataApi', 'ttmStorageApi', function($scope, $window, $state, openDataApi, ttmStorageApi){
+		ttmStorageApi.isBackendReady = false;
 		$scope.signedIn = false;
 
 		// Constantes pour GAPI
@@ -36,7 +36,7 @@
                 gapi.client.load('troptardmiage', 'v1', function() {
                     console.log("troptardmiage api loaded");
                     //le flag isBackendReady permet d'éviter d'appeler gapi avant qu'elle soit chargée
-                    $scope.isBackendReady = true;
+                    ttmStorageApi.isBackendReady = true;
                     loadCallback();
                 }, rootApi);
 		    };
@@ -68,7 +68,7 @@
 				} else {
 					//User is not signed in, redirect to main
 					console.log("User not signed in");
-					$state.go("main");
+					// $state.go("main");
 				}
 			});
 	    }
@@ -96,7 +96,7 @@
 
 	    $scope.loadUsers = function() {
 	    	console.log("loadUsers");
-	    	gapi.client.troptardmiage.users.losers().execute(function(res) {
+	    	ttmStorageApi.losers().execute(function(res) {
 	    		console.log(res);
 	    		if(!res.code) {
 	    			console.log("getting losers");
@@ -104,4 +104,7 @@
 	    	})
 	    }
 
+	    // ttmStorageApi.getUserThemes().execute(function(res) {
+	    // 	console.log(res);
+	    // })
 	}]);

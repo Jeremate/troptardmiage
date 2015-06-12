@@ -1,4 +1,5 @@
 'use strict';
+//TODO: use callbacks
 
 ttmApp.factory('openDataApi', ['$http', function($http){
 	//Constantes pour Open Data
@@ -22,7 +23,7 @@ ttmApp.factory('openDataApi', ['$http', function($http){
 			return $http.get(OD_URL+"/event/summary?catIds="+category+"&periodOfTime=30&itemsPerPage=15&page="+currentPage);
 		},
 		eventDetailed: function(eventId) {
-			return $http.get(OD_URL+"/event/"+eventId);	
+			return $http.get(OD_URL+"/event/"+eventId);
 		}
 	}	
 }]);
