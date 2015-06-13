@@ -95,11 +95,11 @@ public class UserTtmEndpoint {
 		httpMethod = HttpMethod.POST
 	)
 	public UserTtm subscribe(User user, @Named("eventId") String eventId,
-			@Named("title") String title, @Named("category[0].id") String themeId,
+			@Named("title") String title, @Named("themeId") String themeId,
 			@Named("startDate") String startDate,
-			@Named("endDate") String endDate, @Named("city.title") String city,
-			@Named("latitude") Float latitude,
-			@Named("longitude") Float longitude) throws OAuthRequestException, ParseException {
+			@Named("endDate") String endDate, @Named("cityName") String city,
+			@Named("geoLatitude") Float latitude,
+			@Named("geoLongitude") Float longitude) throws OAuthRequestException, ParseException {
 		if (user == null) {
 			throw new OAuthRequestException(authMessage);
 		}

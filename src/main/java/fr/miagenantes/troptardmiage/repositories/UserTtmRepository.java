@@ -13,6 +13,7 @@ import java.util.TreeMap;
 
 import com.google.appengine.api.datastore.GeoPt;
 import com.googlecode.objectify.ObjectifyService;
+
 import static com.googlecode.objectify.ObjectifyService.ofy;
 import fr.miagenantes.troptardmiage.models.Event;
 import fr.miagenantes.troptardmiage.models.Theme;
@@ -43,7 +44,7 @@ public class UserTtmRepository {
     
     public Set<UserTtm> losers() {
         List<UserTtm> userTtms = ofy().load().type(UserTtm.class).list();
-        Map<Long, Boolean> events;
+        Map<String, Boolean> events;
         Map<UserTtm, Double> classement = new HashMap<UserTtm, Double>();//<user, ratio>
         Comparator<UserTtm> comparator = new ValueComparator<UserTtm, Double>(classement);
         Map<UserTtm, Double> classementTrie = new TreeMap<UserTtm, Double>(comparator);
@@ -55,7 +56,7 @@ public class UserTtmRepository {
         	events = user.getSubscriptions();
         	missedEvt = 0;
         	totalEvt = events.size();
-        	for(Map.Entry<Long, Boolean> event : events.entrySet()) {
+        	for(Map.Entry<String, Boolean> event : events.entrySet()) {
         		if(!event.getValue()) {
         			missedEvt++;
         		}
@@ -107,7 +108,7 @@ public class UserTtmRepository {
 			String themeId, String startDate, String endDate, String city,
 			Float latitude, Float longitude) throws ParseException {
 		UserTtm userTtm = get(userId);
-		Theme theme = ThemeRepository.getInstance().getByThemeId(themeId);
+		Theme theme = ThemeRepository.getInstance().get(themeId);
 		//format received dd-MM-yy
 		String pattern = "dd-MM-yy";
 		Date start = new SimpleDateFormat(pattern).parse(startDate);
@@ -126,7 +127,7 @@ public class UserTtmRepository {
 	
 	public UserTtm unsubscribe(String userId, String eventId) {
 		UserTtm userTtm = get(userId);
-		Event evt = EventRepository.getInstance().getByEventId(eventId);
+		Event evt = EventRepository.getInstance().get(eventId);
 		userTtm.getSubscriptions().remove(evt.getId());
 		
 		ofy().save().entity(userTtm).now();

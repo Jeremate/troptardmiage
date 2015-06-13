@@ -5,36 +5,26 @@ import java.util.Set;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
-import com.googlecode.objectify.annotation.Index;
 
 @Entity
 public class Theme {
 	@Id
-	private Long id;
-	@Index
-	private String themeId;
+	private String id;
 	private String name;
 	private String icon;
-	private Set<Long> events = new HashSet<Long>();
+	private Set<String> events = new HashSet<String>();
 	private Set<String> users = new HashSet<String>();;
 
 	//constructors
 	public Theme() {} //must have no-arg constructor in Objectify
 	public Theme(String themeId, String name, String icon) {
-		this.themeId = themeId;
+		this.id = themeId;
 		this.name = name;
 		this.icon = icon;
 	}
-	public Theme(Long id, String themeId, String name, String icon) {
-		this.id = id;
-		this.themeId = themeId;
-		this.name = name;
-		this.icon = icon;
-	}
-	public Theme(Long id, String themeId, String name, String icon,
-			Set<Long> events, Set<String> users) {
-		this.id = id;
-		this.themeId = themeId;
+	public Theme(String themeId, String name, String icon,
+			Set<String> events, Set<String> users) {
+		this.id = themeId;
 		this.name = name;
 		this.icon = icon;
 		this.events = events;
@@ -42,18 +32,11 @@ public class Theme {
 	}
 
 	//getters and setters
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public Theme setId(Long id) {
+	public Theme setId(String id) {
 		this.id = id;
-		return this;
-	}
-	public String getThemeId() {
-		return themeId;
-	}
-	public Theme setThemeId(String themeId) {
-		this.themeId = themeId;
 		return this;
 	}
 	public String getName() {
@@ -70,10 +53,10 @@ public class Theme {
 		this.icon = icon;
 		return this;
 	}
-	public Set<Long> getEvents() {
+	public Set<String> getEvents() {
 		return events;
 	}
-	public Theme setEvents(Set<Long> events) {
+	public Theme setEvents(Set<String> events) {
 		this.events = events;
 		return this;
 	}

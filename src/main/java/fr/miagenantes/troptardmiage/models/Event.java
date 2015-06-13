@@ -5,16 +5,13 @@ import java.util.Date;
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
-import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Load;
 import com.google.appengine.api.datastore.GeoPt;
 
 @Entity
 public class Event {
 	@Id
-	private Long id;
-	@Index
-	private String eventId;
+	private String id;
 	private String title;
 	@Load
 	private Ref<Theme> theme;
@@ -27,7 +24,7 @@ public class Event {
 	public Event() {} //must have no-arg constructor in Objectify
 	public Event(String eventId, String title, Theme theme,
 			Date startDate, Date endDate, String city, GeoPt geoPt) {
-		this.eventId = eventId;
+		this.id = eventId;
 		this.title = title;
 		this.theme = Ref.create(theme);
 		this.startDate = startDate;
@@ -37,53 +34,54 @@ public class Event {
 	}
 
 	//getters and setters
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public Event setId(String id) {
 		this.id = id;
-	}
-	public String getEventId() {
-		return eventId;
-	}
-	public void setEventId(String eventId) {
-		this.eventId = eventId;
+		return this;
 	}
 	public String getTitle() {
 		return title;
 	}
-	public void setTitle(String title) {
+	public Event setTitle(String title) {
 		this.title = title;
+		return this;
 	}
 	public Theme getTheme() {
 		return theme.get();
 	}
-	public void setTheme(Theme theme) {
+	public Event setTheme(Theme theme) {
 		this.theme = Ref.create(theme);
+		return this;
 	}
 	public Date getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
+	public Event setStartDate(Date startDate) {
 		this.startDate = startDate;
+		return this;
 	}
 	public Date getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Date endDate) {
+	public Event setEndDate(Date endDate) {
 		this.endDate = endDate;
+		return this;
 	}
 	public String getCity() {
 		return city;
 	}
-	public void setCity(String city) {
+	public Event setCity(String city) {
 		this.city = city;
+		return this;
 	}
 	public GeoPt getGeoPt() {
 		return geoPt;
 	}
-	public void setGeoPt(GeoPt geoPt) {
+	public Event setGeoPt(GeoPt geoPt) {
 		this.geoPt = geoPt;
+		return this;
 	}
 
 }
