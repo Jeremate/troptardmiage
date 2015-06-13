@@ -2,41 +2,65 @@
 //TODO: use callback
 
 ttmApp.factory('ttmStorageApi', ['$http', function($http){
-	var NOT_READY_MESSAGE = "troptardmiage storage api is not ready"
+	var NOT_READY_MESSAGE = "troptardmiage storage api is not ready";
 
 	return {
 		isBackendReady: false,
 
-		losers: function() {
+		losers: function(callback) {
 			if (!this.isBackendReady) {
 				console.log(NOT_READY_MESSAGE);
 				return;
 			}
-			return gapi.client.troptardmiage.users.losers();
+			gapi.client.troptardmiage.users.losers().execute(callback);
 		},
 
-		getUser: function() {
+		getUser: function(callback) {
 			if (!this.isBackendReady) {
 				console.log(NOT_READY_MESSAGE);
 				return;
 			}
-			return gapi.client.troptardmiage.users.get();
+			gapi.client.troptardmiage.users.get().execute(callback);
 		},
 
-		createUser: function() {
+		createUser: function(callback) {
 			if (!this.isBackendReady) {
 				console.log(NOT_READY_MESSAGE);
 				return;
 			}
-			return gapi.client.troptardmiage.users.create();
+			gapi.client.troptardmiage.users.create().execute(callback);
 		},
 
-		getUserThemes: function() {
+		getUserThemes: function(callback) {
 			if (!this.isBackendReady) {
 				console.log(NOT_READY_MESSAGE);
 				return;
 			}
-			return gapi.client.troptardmiage.users.themes();
+			gapi.client.troptardmiage.users.themes().execute(callback);
+		},
+
+		addUserTheme: function(theme, callback) {
+			if (!this.isBackendReady) {
+				console.log(NOT_READY_MESSAGE);
+				return;
+			}
+			gapi.client.troptardmiage.users.addTheme(theme).execute(callback);
+		},
+
+		subscribe: function(event, callback) {
+			if (!this.isBackendReady) {
+				console.log(NOT_READY_MESSAGE);
+				return;
+			}
+			// gapi.client.troptardmiage.users.subscribe(event).execute(callback);
+		},
+
+		unsubscribe: function(event, callback) {
+			if (!this.isBackendReady) {
+				console.log(NOT_READY_MESSAGE);
+				return;
+			}
+			// gapi.client.troptardmiage.users.unsubscribe(event).execute(callback);
 		}
 
 	};

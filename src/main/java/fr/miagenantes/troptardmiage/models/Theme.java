@@ -14,29 +14,29 @@ public class Theme {
 	@Index
 	private String themeId;
 	private String name;
-	private String linkIcon;
+	private String icon;
 	private Set<Long> events = new HashSet<Long>();
 	private Set<String> users = new HashSet<String>();;
 
 	//constructors
 	public Theme() {} //must have no-arg constructor in Objectify
-	public Theme(String themeId, String name, String linkIcon) {
+	public Theme(String themeId, String name, String icon) {
 		this.themeId = themeId;
 		this.name = name;
-		this.linkIcon = linkIcon;
+		this.icon = icon;
 	}
-	public Theme(Long id, String themeId, String name, String linkIcon) {
+	public Theme(Long id, String themeId, String name, String icon) {
 		this.id = id;
 		this.themeId = themeId;
 		this.name = name;
-		this.linkIcon = linkIcon;
+		this.icon = icon;
 	}
-	public Theme(Long id, String themeId, String name, String linkIcon,
+	public Theme(Long id, String themeId, String name, String icon,
 			Set<Long> events, Set<String> users) {
 		this.id = id;
 		this.themeId = themeId;
 		this.name = name;
-		this.linkIcon = linkIcon;
+		this.icon = icon;
 		this.events = events;
 		this.users = users;
 	}
@@ -63,11 +63,11 @@ public class Theme {
 		this.name = name;
 		return this;
 	}
-	public String getLinkIcon() {
-		return linkIcon;
+	public String getIcon() {
+		return icon;
 	}
-	public Theme setLinkIcon(String linkIcon) {
-		this.linkIcon = linkIcon;
+	public Theme setIcon(String icon) {
+		this.icon = icon;
 		return this;
 	}
 	public Set<Long> getEvents() {

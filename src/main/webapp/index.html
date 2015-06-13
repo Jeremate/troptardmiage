@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/troptardmiage.css">
-    <title>TropTardMiage</title>
+    <title>Trop Tard | Miage Nantes</title>
   </head>
 
   <body ng-app="troptardmiage" ng-controller="MainCtrl">
@@ -26,8 +26,12 @@
         <div ui-view></div>
 
     </div>
-    <a href="#" ng-click="loadODCategories()">CHARGEMENT</a>
-    <a href="#" ng-click="loadUsers()">LIST</a>
+    <p><a href="#" ng-click="loadODThemes()">Thèmes Open Data</a></p>
+    <p><a href="#" ng-click="loadLosers()">Losers</a></p>
+    <p><a href="#" ng-click="myUser()">myUser</a></p>
+    <p><a href="#" ng-click="newUser()">newUser</a></p>
+    <p><a href="#" ng-click="myUserThemes()">myUserThemes</a></p>
+    <p><a href="#" ng-click="addUserTheme(themes[0].children[0])">addUserTheme</a></p>
 
     <footer class="footer">
       <div class="container">

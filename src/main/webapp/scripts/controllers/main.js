@@ -1,7 +1,7 @@
 'use strict';
 
-	ttmApp.controller('MainCtrl', [
-		'$scope', '$window', '$state', 'openDataApi', 'ttmStorageApi', function($scope, $window, $state, openDataApi, ttmStorageApi){
+ttmApp.controller('MainCtrl', [
+	'$scope', '$window', '$state', 'openDataApi', 'ttmStorageApi', function($scope, $window, $state, openDataApi, ttmStorageApi){
 		ttmStorageApi.isBackendReady = false;
 		$scope.signedIn = false;
 
@@ -63,6 +63,7 @@
 				if (!resp.code) {
 					console.log("authentification réussie");
 					$scope.signedIn = true;
+					$scope.user = resp.result;
 				  // User is signed in, redirect to events
 				  	$state.go("events");
 				} else {
@@ -85,26 +86,52 @@
 	    /**
 	     * Load Open Data categories for the region Loire Altlantique
 	     */
-	    $scope.loadODCategories = function() {
-	    	console.log("loading categories");
-	    	openDataApi.categories().success(function(data) {
-		    		openDataApi.events(data[0].id, 1).success(function(data2) {
-		    			console.log(data2);
-		    		});
-		    	});
+	    $scope.loadODThemes = function() {
+	    	console.log("loading open data themes");
+	    	openDataApi.themes(function(data) {
+	    		console.log(data);
+	    		$scope.themes = data;
+	    	});
 	    }
 
-	    $scope.loadUsers = function() {
-	    	console.log("loadUsers");
-	    	ttmStorageApi.losers().execute(function(res) {
+	    $scope.loadLosers = function() {
+	    	console.log("loadLosers");
+	    	ttmStorageApi.losers(function(res) {
 	    		console.log(res);
 	    		if(!res.code) {
 	    			console.log("getting losers");
+	    			$scope.losers = res.items;
 	    		}
-	    	})
+	    	});
 	    }
 
-	    // ttmStorageApi.getUserThemes().execute(function(res) {
-	    // 	console.log(res);
-	    // })
+	    $scope.myUser = function() {
+	    	console.log("myUser");
+	    	ttmStorageApi.getUser(function(res) {
+	    		console.log(res);
+	    	});
+	    }
+
+	    $scope.newUser = function() {
+	    	console.log("newUser");
+	    	ttmStorageApi.createUser(function(res) {
+	    		console.log(res);
+	    	});
+	    }
+
+	    $scope.myUserThemes = function() {
+	    	console.log("myUserThemes");
+	    	ttmStorageApi.getUserThemes(function(res) {
+	    		console.log(res);
+	    	});
+	    }
+
+	    $scope.addUserTheme = function(theme) {
+	    	console.log("addUserTheme");
+	    	console.log(theme);
+	    	ttmStorageApi.addUserTheme(theme, function(res) {
+	    		console.log(res);
+	    	});
+	    }
+
 	}]);

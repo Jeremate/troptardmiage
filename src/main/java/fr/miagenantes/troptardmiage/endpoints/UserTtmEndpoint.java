@@ -79,14 +79,14 @@ public class UserTtmEndpoint {
 		path = "users/themes",
 		httpMethod = HttpMethod.POST
 	)
-	public UserTtm addTheme(User user, @Named("themeId") String themeId,
-			@Named("name") String name, @Named("linkIcon") String linkIcon)
+	public UserTtm addTheme(User user, @Named("id") String themeId,
+			@Named("name") String name, @Named("icon") String icon)
 			throws OAuthRequestException {
 		if (user == null) {
 			throw new OAuthRequestException(authMessage);
 		}
 		return UserTtmRepository.getInstance()
-				.addTheme(user.getUserId(), new Theme(themeId, name, linkIcon));
+				.addTheme(user.getUserId(), new Theme(themeId, name, icon));
 	}
 
 	@ApiMethod(
@@ -95,9 +95,9 @@ public class UserTtmEndpoint {
 		httpMethod = HttpMethod.POST
 	)
 	public UserTtm subscribe(User user, @Named("eventId") String eventId,
-			@Named("title") String title, @Named("themeId") String themeId,
+			@Named("title") String title, @Named("category[0].id") String themeId,
 			@Named("startDate") String startDate,
-			@Named("endDate") String endDate, @Named("city") String city,
+			@Named("endDate") String endDate, @Named("city.title") String city,
 			@Named("latitude") Float latitude,
 			@Named("longitude") Float longitude) throws OAuthRequestException, ParseException {
 		if (user == null) {
