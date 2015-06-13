@@ -63,7 +63,7 @@ ttmApp.controller('MainCtrl', [
 				if (!resp.code) {
 					console.log("authentification réussie");
 					$scope.signedIn = true;
-					$scope.user = resp.result;
+					$scope.newUser();
 				  // User is signed in, redirect to events
 				  	$state.go("events");
 				} else {
@@ -94,6 +94,14 @@ ttmApp.controller('MainCtrl', [
 	    	});
 	    }
 
+	    $scope.loadODEvents = function(themeId) {
+	    	console.log("loading open data events");
+	    	openDataApi.events(themeId, 1, function(data) {
+	    		console.log(data);
+	    		$scope.events = data.data;
+	    	});
+	    }
+
 	    $scope.loadLosers = function() {
 	    	console.log("loadLosers");
 	    	ttmStorageApi.losers(function(res) {
@@ -116,6 +124,9 @@ ttmApp.controller('MainCtrl', [
 	    	console.log("newUser");
 	    	ttmStorageApi.createUser(function(res) {
 	    		console.log(res);
+	    		if(!res.code) {
+	    			$scope.user = res.items;
+	    		}
 	    	});
 	    }
 
@@ -132,6 +143,14 @@ ttmApp.controller('MainCtrl', [
 	    	ttmStorageApi.addUserTheme(theme, function(res) {
 	    		console.log(res);
 	    	});
+	    }
+
+	    $scope.subscribe = function(event) {
+	    	console.log("subscribe");
+	    	console.log(event);
+	    	ttmStorageApi.subscribe(event, function(res) {
+	    		console.log(res);
+	    	})
 	    }
 
 	}]);
