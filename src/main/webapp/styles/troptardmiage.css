@@ -1,16 +1,15 @@
-footer {
-	background-color: #f5f5f5;
-    bottom: 0;
-    height: 50px;
-    position: relative;
-    width: 100%;
-    padding-top: 10px;
-}
-
-body {
-    padding-top: 70px;
-}
-
-#nav-mobile {
-    z-index: 10;
+@media(min-width:768px) {
+    header .intro-text {
+        padding-top: 275px !important;
+        padding-bottom: 175px !important;
+    }
+    
+        header .intro-text .intro-lead-in {
+        font-size: 25px !important;
+        font-style: normal !important;
+    }
+    
+        header .intro-text .intro-heading {
+        font-size: 45px !important;
+    }
 }
