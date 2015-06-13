@@ -1,3 +1,7 @@
+header {
+    background-image: url(img/header-bg.jpg) !important;
+}
+
 @media(min-width:768px) {
     header .intro-text {
         padding-top: 275px !important;
@@ -13,3 +17,4 @@
         font-size: 45px !important;
     }
 }
+
