@@ -108,7 +108,7 @@ ttmApp.controller('MainCtrl', [
 	    		console.log(res);
 	    		if(!res.code) {
 	    			console.log("getting losers");
-	    			$scope.losers = res.items;
+	    			$scope.losers = res;
 	    		}
 	    	});
 	    }
@@ -125,7 +125,7 @@ ttmApp.controller('MainCtrl', [
 	    	ttmStorageApi.createUser(function(res) {
 	    		console.log(res);
 	    		if(!res.code) {
-	    			$scope.user = res.items;
+	    			$scope.user = res;
 	    		}
 	    	});
 	    }
@@ -139,7 +139,6 @@ ttmApp.controller('MainCtrl', [
 
 	    $scope.addUserTheme = function(theme) {
 	    	console.log("addUserTheme");
-	    	console.log(theme);
 	    	ttmStorageApi.addUserTheme(theme, function(res) {
 	    		console.log(res);
 	    	});
@@ -147,10 +146,15 @@ ttmApp.controller('MainCtrl', [
 
 	    $scope.subscribe = function(event) {
 	    	console.log("subscribe");
-	    	console.log(event);
 	    	ttmStorageApi.subscribe(event, function(res) {
 	    		console.log(res);
 	    	})
 	    }
 
+	    $scope.unsubscribe = function(event) {
+	    	console.log("unsubscribe");
+	    	ttmStorageApi.unsubscribe(event, function(res) {
+	    		console.log(res);
+	    	})
+	    }
 	}]);

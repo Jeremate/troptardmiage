@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 import com.google.appengine.api.datastore.GeoPt;
@@ -42,12 +41,12 @@ public class UserTtmRepository {
         return ofy().load().type(UserTtm.class).id(id).now();
     }
     
-    public Set<UserTtm> losers() {
+    public Map<String, Double> losers() {
         List<UserTtm> userTtms = ofy().load().type(UserTtm.class).list();
         Map<String, Boolean> events;
-        Map<UserTtm, Double> classement = new HashMap<UserTtm, Double>();//<user, ratio>
-        Comparator<UserTtm> comparator = new ValueComparator<UserTtm, Double>(classement);
-        Map<UserTtm, Double> classementTrie = new TreeMap<UserTtm, Double>(comparator);
+        Map<String, Double> classement = new HashMap<String, Double>();//<userID, ratio>
+        Comparator<String> comparator = new ValueComparator<String, Double>(classement);
+        Map<String, Double> classementTrie = new TreeMap<String, Double>(comparator);
         Integer missedEvt;
         Integer totalEvt;
 
@@ -61,11 +60,11 @@ public class UserTtmRepository {
         			missedEvt++;
         		}
         	}
-        	classement.put(user, ((double) missedEvt/totalEvt));
+        	classement.put(user.getUser().getNickname(), ((double) missedEvt/(double) totalEvt));
         }
         classementTrie.putAll(classement);
         
-        return classementTrie.keySet();
+        return classementTrie;
     }
 
     public UserTtm create(UserTtm userTtm) {
