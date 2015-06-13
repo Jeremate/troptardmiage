@@ -115,7 +115,7 @@ ttmApp.controller('MainCtrl', [
 
 	    $scope.myUser = function() {
 	    	console.log("myUser");
-	    	ttmStorageApi.getUser(function(res) {
+	    	ttmStorageApi.getUser("0", function(res) {
 	    		console.log(res);
 	    	});
 	    }
@@ -125,7 +125,7 @@ ttmApp.controller('MainCtrl', [
 	    	ttmStorageApi.createUser(function(res) {
 	    		console.log(res);
 	    		if(!res.code) {
-	    			$scope.user = res;
+	    			$scope.user = res.result;
 	    		}
 	    	});
 	    }
@@ -134,6 +134,7 @@ ttmApp.controller('MainCtrl', [
 	    	console.log("myUserThemes");
 	    	ttmStorageApi.getUserThemes(function(res) {
 	    		console.log(res);
+	    		if(!res.code) {}
 	    	});
 	    }
 
@@ -141,6 +142,8 @@ ttmApp.controller('MainCtrl', [
 	    	console.log("addUserTheme");
 	    	ttmStorageApi.addUserTheme(theme, function(res) {
 	    		console.log(res);
+	    		if(!res.code) {}
+	    		// $scope.user = res.result;
 	    	});
 	    }
 
@@ -148,6 +151,8 @@ ttmApp.controller('MainCtrl', [
 	    	console.log("subscribe");
 	    	ttmStorageApi.subscribe(event, function(res) {
 	    		console.log(res);
+	    		if(!res.code) {}
+	    		// $scope.user = res.result;
 	    	})
 	    }
 
@@ -155,6 +160,8 @@ ttmApp.controller('MainCtrl', [
 	    	console.log("unsubscribe");
 	    	ttmStorageApi.unsubscribe(event, function(res) {
 	    		console.log(res);
+	    		if(!res.code) {}
+	    		// $scope.user = res.result;
 	    	})
 	    }
 	}]);

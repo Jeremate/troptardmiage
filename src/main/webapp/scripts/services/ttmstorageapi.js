@@ -15,12 +15,12 @@ ttmApp.factory('ttmStorageApi', ['$http', function($http){
 			gapi.client.troptardmiage.users.losers().execute(callback);
 		},
 
-		getUser: function(callback) {
+		getUser: function(userId, callback) {
 			if (!this.isBackendReady) {
 				console.log(NOT_READY_MESSAGE);
 				return;
 			}
-			gapi.client.troptardmiage.users.get().execute(callback);
+			gapi.client.troptardmiage.users.get({"userId": userId}).execute(callback);
 		},
 
 		createUser: function(callback) {
