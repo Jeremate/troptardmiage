@@ -4,6 +4,8 @@ ttmApp.controller('MainCtrl', [
 	'$scope', '$window', '$state', 'openDataApi', 'ttmStorageApi', function($scope, $window, $state, openDataApi, ttmStorageApi){
 		ttmStorageApi.isBackendReady = false;
 		$scope.signedIn = false;
+		$scope.themes = [];
+		$scope.selectedThemes = [];
 
 		// Constantes pour GAPI
 		var CLIENT_ID = "679411653009-62udgm0l3010dqbhon9lrff7pcqldrg9.apps.googleusercontent.com";
@@ -63,13 +65,13 @@ ttmApp.controller('MainCtrl', [
 				if (!resp.code) {
 					console.log("authentification réussie");
 					$scope.signedIn = true;
-					$scope.newUser();
+					$scope.user = resp.result;
+					$scope.loadODThemes();
 				  // User is signed in, redirect to events
 				  	$state.go("events");
 				} else {
-					//User is not signed in, redirect to main
+					//User is not signed in
 					console.log("User not signed in");
-					// $state.go("main");
 				}
 			});
 	    }
@@ -79,7 +81,7 @@ ttmApp.controller('MainCtrl', [
 	    		signin(false, userAuthed);
 	    	} else {
 	    		$scope.signedIn = false;
-	    		$state.go("main");
+	    		$state.go("welcome");
 	    	}
 	    }
 
@@ -87,11 +89,13 @@ ttmApp.controller('MainCtrl', [
 	     * Load Open Data categories for the region Loire Altlantique
 	     */
 	    $scope.loadODThemes = function() {
-	    	console.log("loading open data themes");
-	    	openDataApi.themes(function(data) {
-	    		console.log(data);
-	    		$scope.themes = data;
-	    	});
+	    	if($scope.themes.length == 0) {
+		    	console.log("loading open data themes");
+		    	openDataApi.themes(function(data) {
+		    		console.log(data);
+		    		$scope.themes = data;
+		    	});
+		    }
 	    }
 
 	    $scope.loadODEvents = function(themeId) {
@@ -108,7 +112,7 @@ ttmApp.controller('MainCtrl', [
 	    		console.log(res);
 	    		if(!res.code) {
 	    			console.log("getting losers");
-	    			$scope.losers = res;
+	    			$scope.losers = res.items;
 	    		}
 	    	});
 	    }
