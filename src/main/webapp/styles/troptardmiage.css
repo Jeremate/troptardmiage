@@ -2,6 +2,28 @@ header {
     background-image: url(img/header-bg.jpg) !important;
 }
 
+footer .col-md-8 span{
+	float:left;
+}
+
+footer .col-md-4 ul{
+	float:right;
+}
+
+footer .col-md-4 img{
+	max-width:43px;
+	height:auto;
+}
+
+footer .col-md-4 div{
+	float:left;
+	margin-right:5px;
+}
+
+footer .col-md-4 a{
+	float:left;
+}
+
 .text-center{
 	text-align:center !important;
 }
@@ -82,4 +104,8 @@ header {
         margin-bottom: 50px;
         min-height: 100px;
     }
+}
+
+#portfolio .timeline-heading h4{
+	border-bottom:1px solid #fed136;
 }
