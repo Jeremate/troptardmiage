@@ -26,25 +26,21 @@ public class ThemeRepository {
         return themeRepository;
     }
     
-    public Theme get(Long id) {
+    public Theme get(String id) {
     	return ofy().load().type(Theme.class).id(id).now();
-    }
-    
-    public Theme getByThemeId(String themeId) {
-    	return ofy().load().type(Theme.class).filter("themeId", themeId).first().now();
     }
     
     public List<Theme> list() {
     	return ofy().load().type(Theme.class).list();
     }
     
-    public Collection<Theme> listByIds(Collection<Long> ids) {
-    	Map<Long, Theme> themes = ofy().load().type(Theme.class).ids(ids);
+    public Collection<Theme> listByIds(Collection<String> ids) {
+    	Map<String, Theme> themes = ofy().load().type(Theme.class).ids(ids);
     	return themes.values();
     }
     
     public Theme create(Theme theme) {
-    	Theme existingTheme = getByThemeId(theme.getThemeId());
+    	Theme existingTheme = get(theme.getId());
     	
     	if(existingTheme == null) {
     		ofy().save().entity(theme).now();

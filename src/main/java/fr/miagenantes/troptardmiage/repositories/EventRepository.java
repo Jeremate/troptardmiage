@@ -28,12 +28,12 @@ public class EventRepository {
     	return ofy().load().type(Event.class).list();
     }
     
-    public Event getByEventId(String eventId) {
-    	return ofy().load().type(Event.class).filter("eventId", eventId).first().now();
+    public Event get(String eventId) {
+    	return ofy().load().type(Event.class).id(eventId).now();
     }
 
 	public Event create(Event event) {
-		Event existingEvent = getByEventId(event.getEventId());
+		Event existingEvent = get(event.getId());
     	
     	if(existingEvent == null) {
     		ofy().save().entity(event).now();

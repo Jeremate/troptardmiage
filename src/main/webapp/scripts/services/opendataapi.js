@@ -10,7 +10,7 @@ ttmApp.factory('openDataApi', ['$http', function($http){
 			$http.get(OD_URL+"/category/p2_100729%2Cp2_100730%2Cp2_100731%2Cp2_100732/children?depth=1").success(callback);
 		},
 		events: function(category, currentPage, callback) {
-			//période de 30 jours, nombre d'items de 15
+			//période de 180 jours, nombre d'items de 15
 
 			//in case of several themes
 			// var catIds = "";
@@ -20,7 +20,7 @@ ttmApp.factory('openDataApi', ['$http', function($http){
 			// 		catIds += "%2C";
 			// 	}
 			// }
-			$http.get(OD_URL+"/event/summary?catIds="+category+"&periodOfTime=30&itemsPerPage=15&page="+currentPage).success(callback);
+			$http.get(OD_URL+"/event/summary?catIds="+category+"&periodOfTime=180&itemsPerPage=15&page="+currentPage).success(callback);
 		},
 		eventDetailed: function(eventId, callback) {
 			$http.get(OD_URL+"/event/"+eventId).success(callback);

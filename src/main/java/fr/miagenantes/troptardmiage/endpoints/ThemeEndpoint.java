@@ -44,6 +44,6 @@ public class ThemeEndpoint {
 		if(user == null) {
 			throw new OAuthRequestException(authMessage);
 		}
-		return ThemeRepository.getInstance().getByThemeId(themeId);
+		return ThemeRepository.getInstance().get(themeId);
 	}
 }

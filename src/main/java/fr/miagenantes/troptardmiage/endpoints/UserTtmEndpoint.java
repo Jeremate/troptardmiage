@@ -2,7 +2,7 @@ package fr.miagenantes.troptardmiage.endpoints;
 
 import java.text.ParseException;
 import java.util.Collection;
-import java.util.Set;
+import java.util.Map;
 
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
@@ -31,7 +31,7 @@ public class UserTtmEndpoint {
 		path = "users/losers",
 		httpMethod = HttpMethod.GET
 	)
-	public Set<UserTtm> losers(User user) throws OAuthRequestException {
+	public Map<String, Double> losers(User user) throws OAuthRequestException {
 		if(user == null) {
 			throw new OAuthRequestException(authMessage);
 		}
@@ -43,11 +43,11 @@ public class UserTtmEndpoint {
 		path = "users",
 		httpMethod = HttpMethod.GET
 	)
-	public UserTtm get(User user) throws OAuthRequestException {
+	public UserTtm get(User user, @Named("userId") String userId) throws OAuthRequestException {
 		if(user == null) {
 			throw new OAuthRequestException(authMessage);
 		}
-		return UserTtmRepository.getInstance().get(user.getUserId());
+		return UserTtmRepository.getInstance().get(userId);
 	}
 
 	@ApiMethod(
@@ -95,11 +95,11 @@ public class UserTtmEndpoint {
 		httpMethod = HttpMethod.POST
 	)
 	public UserTtm subscribe(User user, @Named("eventId") String eventId,
-			@Named("title") String title, @Named("category[0].id") String themeId,
+			@Named("title") String title, @Named("themeId") String themeId,
 			@Named("startDate") String startDate,
-			@Named("endDate") String endDate, @Named("city.title") String city,
-			@Named("latitude") Float latitude,
-			@Named("longitude") Float longitude) throws OAuthRequestException, ParseException {
+			@Named("endDate") String endDate, @Named("cityName") String city,
+			@Named("geoLatitude") Float latitude,
+			@Named("geoLongitude") Float longitude) throws OAuthRequestException, ParseException {
 		if (user == null) {
 			throw new OAuthRequestException(authMessage);
 		}

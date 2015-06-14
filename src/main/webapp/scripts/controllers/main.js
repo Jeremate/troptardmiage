@@ -63,7 +63,7 @@ ttmApp.controller('MainCtrl', [
 				if (!resp.code) {
 					console.log("authentification réussie");
 					$scope.signedIn = true;
-					$scope.user = resp.result;
+					$scope.newUser();
 				  // User is signed in, redirect to events
 				  	$state.go("events");
 				} else {
@@ -94,20 +94,28 @@ ttmApp.controller('MainCtrl', [
 	    	});
 	    }
 
+	    $scope.loadODEvents = function(themeId) {
+	    	console.log("loading open data events");
+	    	openDataApi.events(themeId, 1, function(data) {
+	    		console.log(data);
+	    		$scope.events = data.data;
+	    	});
+	    }
+
 	    $scope.loadLosers = function() {
 	    	console.log("loadLosers");
 	    	ttmStorageApi.losers(function(res) {
 	    		console.log(res);
 	    		if(!res.code) {
 	    			console.log("getting losers");
-	    			$scope.losers = res.items;
+	    			$scope.losers = res;
 	    		}
 	    	});
 	    }
 
 	    $scope.myUser = function() {
 	    	console.log("myUser");
-	    	ttmStorageApi.getUser(function(res) {
+	    	ttmStorageApi.getUser("0", function(res) {
 	    		console.log(res);
 	    	});
 	    }
@@ -116,6 +124,9 @@ ttmApp.controller('MainCtrl', [
 	    	console.log("newUser");
 	    	ttmStorageApi.createUser(function(res) {
 	    		console.log(res);
+	    		if(!res.code) {
+	    			$scope.user = res.result;
+	    		}
 	    	});
 	    }
 
@@ -123,15 +134,34 @@ ttmApp.controller('MainCtrl', [
 	    	console.log("myUserThemes");
 	    	ttmStorageApi.getUserThemes(function(res) {
 	    		console.log(res);
+	    		if(!res.code) {}
 	    	});
 	    }
 
 	    $scope.addUserTheme = function(theme) {
 	    	console.log("addUserTheme");
-	    	console.log(theme);
 	    	ttmStorageApi.addUserTheme(theme, function(res) {
 	    		console.log(res);
+	    		if(!res.code) {}
+	    		// $scope.user = res.result;
 	    	});
 	    }
 
+	    $scope.subscribe = function(event) {
+	    	console.log("subscribe");
+	    	ttmStorageApi.subscribe(event, function(res) {
+	    		console.log(res);
+	    		if(!res.code) {}
+	    		// $scope.user = res.result;
+	    	})
+	    }
+
+	    $scope.unsubscribe = function(event) {
+	    	console.log("unsubscribe");
+	    	ttmStorageApi.unsubscribe(event, function(res) {
+	    		console.log(res);
+	    		if(!res.code) {}
+	    		// $scope.user = res.result;
+	    	})
+	    }
 	}]);

@@ -44,6 +44,6 @@ public class EventEndpoint {
 		if(user == null) {
 			throw new OAuthRequestException(authMessage);
 		}
-		return EventRepository.getInstance().getByEventId(eventId);
+		return EventRepository.getInstance().get(eventId);
 	}
 }
