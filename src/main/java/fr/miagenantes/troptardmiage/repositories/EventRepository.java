@@ -28,7 +28,7 @@ public class EventRepository {
     	return ofy().load().type(Event.class).list();
     }
     
-    public static Event get(String eventId) {
+    public Event get(String eventId) {
     	return ofy().load().type(Event.class).id(eventId).now();
     }
 
