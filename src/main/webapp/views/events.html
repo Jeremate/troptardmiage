@@ -71,20 +71,21 @@
                     </ul>
                 </div>
                  <div class="col-lg-5">
+                 <button type="button" class="btn btn-primary" ng-click="subscribe(events[0])">SUBSCRIBE</button>
+                <button type="button" class="btn btn-primary" ng-click="loadLosers()">LOAD LOSERS</button>
                     <h2 class="section-heading text-center">Meilleurs Scores</h2>
-                    <h3 class="section-subheading text-muted text-center titre-high-score">Plus vous grimpez dans le classement en ratant les événements, plus vous êtes un looser ! </h3>
+                    <h3 class="section-subheading text-muted text-center titre-high-score">Plus vous grimpez dans le classement en ratant les événements, plus vous êtes un loser ! </h3>
 
-                    <ul class="high-score">
+                    <ul class="high-score" ng-repeat="(key, percentage) in losers">
                         <li>
                             <img src="styles/img/citron-1.png">
                                 <span>
-                                    <h4 class="subheading titre-min-cent">Jérémy Klauer</h4><br/>
-                                    <span class="text-muted">95% d'événements ratés</span>
+                                    <h4 class="subheading titre-min-cent" ng-bind="key"></h4><br/>
+                                    <p class="text-muted"><span ng-bind="percentage"></span> % d'événements ratés</p>
                                 </span>
 
                         </li>
-
-                        <li>
+                       <!--  <li>
                             <img src="styles/img/citron-2.png">
                             <span>
                                 <h4 class="subheading titre-min-cent">Paul-Jakez Bocéno</h4><br/>
@@ -100,7 +101,7 @@
                                 <span class="text-muted">82% d'événements ratés</span>
                             </span>
 
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -112,12 +113,12 @@
     <!-- Préférences -->
     <div class="portfolio-modal modal fade bg-light-gray" id="preferences" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
+            <!-- <div class="close-modal" data-dismiss="modal">
                 <div class="lr">
                     <div class="rl">
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
@@ -130,301 +131,23 @@
                         <h4 ng-bind="themeMere.name"></h4>
                     </div>
                     <div class="col-md-2 col-sm-3 portfolio-item" ng-repeat="theme in themeMere.children">
-                        <a href="#" class="portfolio-link" ng-click="addSelectedTheme(theme.id)">
+                        <a href="#" class="portfolio-link" ng-click="manageSelectedThemes(theme)">
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content">
                                     <i class="fa fa-plus fa-3x"></i>
                                 </div>
                             </div>
-                            <img ng-src="{{theme.icon}}" class="img-responsive">
+                            <img ng-src="{{theme.icon || themeMere.icon}}" class="img-responsive" alt="">
                         </a>
                         <div class="portfolio-caption">
                             <h4 ng-bind="theme.name"></h4>
                         </div>
                     </div>
-                    <div style="clear:both"></div>
-                    <!-- <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="#" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/startup-framework.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Framework</h4>
-                            <p class="text-muted">Website Design</p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="#" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/treehouse.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Treehouse</h4>
-                            <p class="text-muted">Website Design</p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="#" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/golden.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Golden</h4>
-                            <p class="text-muted">Website Design</p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="#" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/escape.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Escape</h4>
-                            <p class="text-muted">Website Design</p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="#" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/dreams.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Dreams</h4>
-                            <p class="text-muted">Website Design</p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="#" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/dreams.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Dreams</h4>
-                            <p class="text-muted">Website Design</p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="#" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/dreams.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Dreams</h4>
-                            <p class="text-muted">Website Design</p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="#" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/dreams.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Dreams</h4>
-                            <p class="text-muted">Website Design</p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="#" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/dreams.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Dreams</h4>
-                            <p class="text-muted">Website Design</p>
-                        </div>
-                    </div>
-                    <div style="clear:both"></div>
-
-                    <div class="timeline-heading"><h4>Musique</h4></div>
-                    <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="#" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/roundicons.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Round Icons</h4>
-                            <p class="text-muted">Graphic Design</p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="#" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/startup-framework.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Framework</h4>
-                            <p class="text-muted">Website Design</p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="#" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/treehouse.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Treehouse</h4>
-                            <p class="text-muted">Website Design</p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="#" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/golden.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Golden</h4>
-                            <p class="text-muted">Website Design</p>
-                        </div>
-                    </div>
-                    <div style="clear:both"></div>
-
-
-                    <div class="timeline-heading"><h4>Spectacle</h4></div>
-                    <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="#" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/roundicons.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Round Icons</h4>
-                            <p class="text-muted">Graphic Design</p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="#" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/startup-framework.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Framework</h4>
-                            <p class="text-muted">Website Design</p>
-                        </div>
-                    </div>
-                    <div style="clear:both"></div>
-
-
-                    <div class="timeline-heading"><h4>Histoire</h4></div>
-                    <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="#" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/roundicons.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Round Icons</h4>
-                            <p class="text-muted">Graphic Design</p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="€" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/startup-framework.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Framework</h4>
-                            <p class="text-muted">Website Design</p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="#" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/treehouse.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Treehouse</h4>
-                            <p class="text-muted">Website Design</p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-3 portfolio-item">
-                        <a href="#" class="portfolio-link">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-plus fa-3x"></i>
-                                </div>
-                            </div>
-                            <img src="bower_components/startbootstrap-agency/img/portfolio/golden.png" class="img-responsive" alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>Golden</h4>
-                            <p class="text-muted">Website Design</p>
-                        </div>
-                    </div>
-                    <div style="clear:both"></div> -->
+                    <div style="clear:both;margin-bottom: 20px;"></div>
                 </div>
                 <div style="clear:both"></div>
-                <button type="button" class="btn btn-primary btn-close" data-dismiss="modal"><i class="fa fa-times"></i> Annuler</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check"></i> Valider</button>
+                <!-- <button type="button" class="btn btn-primary btn-close" data-dismiss="modal" ng-click="cancelSelectedThemes()"><i class="fa fa-times"></i> Annuler</button> -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="validateSelectedThemes()"><i class="fa fa-check"></i> Valider</button>
             </div>
         </div>
     </div>

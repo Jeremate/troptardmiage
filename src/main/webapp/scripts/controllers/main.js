@@ -2,10 +2,15 @@
 
 ttmApp.controller('MainCtrl', [
 	'$scope', '$window', '$state', 'openDataApi', 'ttmStorageApi', function($scope, $window, $state, openDataApi, ttmStorageApi){
+
+		//variables
 		ttmStorageApi.isBackendReady = false;
+		$scope.user = {};
 		$scope.signedIn = false;
 		$scope.themes = [];
 		$scope.selectedThemes = [];
+		$scope.events = [];
+		$scope.losers = [];
 
 		// Constantes pour GAPI
 		var CLIENT_ID = "679411653009-62udgm0l3010dqbhon9lrff7pcqldrg9.apps.googleusercontent.com";
@@ -65,8 +70,10 @@ ttmApp.controller('MainCtrl', [
 				if (!resp.code) {
 					console.log("authentification réussie");
 					$scope.signedIn = true;
-					$scope.user = resp.result;
+					$scope.myUser();
 					$scope.loadODThemes();
+					$scope.loadLosers();
+					//TODO : ajouter les thèmes du user au $scope.selectedThemes
 				  // User is signed in, redirect to events
 				  	$state.go("events");
 				} else {
@@ -85,6 +92,19 @@ ttmApp.controller('MainCtrl', [
 	    	}
 	    }
 
+	    $scope.myUser = function() {
+	    	console.log("myUser");
+	    	ttmStorageApi.createUser(function(res) {
+	    		if(!res.code) {
+	    			$scope.user = res.result;
+	    		} else {
+	    			console.log(res);
+	    		}
+	    	});
+	    }
+
+	    // --------------- end authentication part ---------------
+
 	    /**
 	     * Load Open Data categories for the region Loire Altlantique
 	     */
@@ -92,7 +112,7 @@ ttmApp.controller('MainCtrl', [
 	    	if($scope.themes.length == 0) {
 		    	console.log("loading open data themes");
 		    	openDataApi.themes(function(data) {
-		    		console.log(data);
+		    		// console.log(data);
 		    		$scope.themes = data;
 		    	});
 		    }
@@ -102,61 +122,18 @@ ttmApp.controller('MainCtrl', [
 	    	console.log("loading open data events");
 	    	openDataApi.events(themeId, 1, function(data) {
 	    		console.log(data);
-	    		$scope.events = data.data;
-	    	});
-	    }
-
-	    $scope.loadLosers = function() {
-	    	console.log("loadLosers");
-	    	ttmStorageApi.losers(function(res) {
-	    		console.log(res);
-	    		if(!res.code) {
-	    			console.log("getting losers");
-	    			$scope.losers = res.items;
-	    		}
-	    	});
-	    }
-
-	    $scope.myUser = function() {
-	    	console.log("myUser");
-	    	ttmStorageApi.getUser("0", function(res) {
-	    		console.log(res);
-	    	});
-	    }
-
-	    $scope.newUser = function() {
-	    	console.log("newUser");
-	    	ttmStorageApi.createUser(function(res) {
-	    		console.log(res);
-	    		if(!res.code) {
-	    			$scope.user = res.result;
-	    		}
-	    	});
-	    }
-
-	    $scope.myUserThemes = function() {
-	    	console.log("myUserThemes");
-	    	ttmStorageApi.getUserThemes(function(res) {
-	    		console.log(res);
-	    		if(!res.code) {}
-	    	});
-	    }
-
-	    $scope.addUserTheme = function(theme) {
-	    	console.log("addUserTheme");
-	    	ttmStorageApi.addUserTheme(theme, function(res) {
-	    		console.log(res);
-	    		if(!res.code) {}
-	    		// $scope.user = res.result;
+	    		$scope.events = $scope.events.concat(data.data);
 	    	});
 	    }
 
 	    $scope.subscribe = function(event) {
 	    	console.log("subscribe");
 	    	ttmStorageApi.subscribe(event, function(res) {
-	    		console.log(res);
-	    		if(!res.code) {}
-	    		// $scope.user = res.result;
+	    		if(!res.code) {
+	    			$scope.user = res.result;
+	    		} else {
+	    			console.log(res);
+	    		}
 	    	})
 	    }
 
@@ -165,7 +142,82 @@ ttmApp.controller('MainCtrl', [
 	    	ttmStorageApi.unsubscribe(event, function(res) {
 	    		console.log(res);
 	    		if(!res.code) {}
-	    		// $scope.user = res.result;
+	    		$scope.user = res.result;
 	    	})
+	    }
+
+	    $scope.loadLosers = function() {
+	    	console.log("loadLosers");
+	    	ttmStorageApi.losers(function(res) {
+	    		if(!res.code) {
+	    			console.log("getting losers");
+	    			// $scope.losers = res.items;
+	    			$scope.losers = res.result;
+	    		} else {
+	    			console.log(res);
+	    		}
+	    	});
+	    }
+
+
+	    // ---------------------------------------------------------
+	    // --------------- Part on selected themes -----------------
+	    // ---------------------------------------------------------
+
+	    $scope.manageSelectedThemes = function(theme) {
+	    	var index = $scope.selectedThemes.indexOf(theme);
+	    	if(index != -1) {
+	    		console.log("removing selected theme");
+	    		$scope.selectedThemes.splice(index, 1);
+	    		removeUserTheme(theme);
+	    	} else {
+	    		console.log("adding selected theme");
+	    		$scope.selectedThemes.push(theme);
+	    		addUserTheme(theme);
+	    	}
+	    }
+
+	    $scope.cancelSelectedThemes = function() {
+	    	console.log("cancelSelectedThemes");
+	    	console.log($scope.user);
+	    	console.log($scope.user.hasOwnProperty("themes"));
+	    	if($scope.user.hasOwnProperty("themes")) {
+	    		$scope.selectedThemes = $scope.user.themes;
+	    	} else {
+	    		$scope.selectedThemes = [];
+	    	}
+	    }
+
+	    $scope.validateSelectedThemes = function() {
+	    	console.log("validateSelectedThemes");
+	    	// console.log($scope.user);
+	    	$scope.events = [];
+	    	angular.forEach($scope.selectedThemes, function(value, key){
+	    		$scope.loadODEvents(value.id);
+	    	});
+	    }
+
+	    var addUserTheme = function(theme) {
+	    	console.log("addUserTheme");
+	    	ttmStorageApi.addUserTheme(theme, function(res) {
+	    		if(!res.code) {
+	    			$scope.user = res.result;
+	    			// $scope.selectedThemes = $scope.user.themes;
+	    		} else {
+	    			console.log(res);
+	    		}
+	    	});
+	    }
+
+	    var removeUserTheme = function(theme) {
+	    	console.log("removeUserTheme");
+	    	ttmStorageApi.removeUserTheme(theme, function(res) {
+	    		if(!res.code) {
+	    			$scope.user = res.result;
+	    			// $scope.selectedThemes = $scope.user.themes;
+	    		} else {
+	    			console.log(res);
+	    		}
+	    	});
 	    }
 	}]);
