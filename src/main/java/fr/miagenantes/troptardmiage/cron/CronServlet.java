@@ -28,13 +28,22 @@ import javax.servlet.http.*;
 
 import com.google.appengine.api.users.User;
 import fr.miagenantes.troptardmiage.models.UserTtm;
+import fr.miagenantes.troptardmiage.models.Event;
 import fr.miagenantes.troptardmiage.repositories.UserTtmRepository;
+import fr.miagenantes.troptardmiage.repositories.EventRepository;
+
 
 import java.util.List;
 import java.io.* ;
 import java.util.*;
+import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 @SuppressWarnings("serial")
 public class CronServlet extends HttpServlet {
@@ -42,8 +51,6 @@ private static final Logger _logger = Logger.getLogger(CronServlet.class.getName
 
 public void sendmail(UserTtm user){
     try {
-        //_logger.info("Cron Job has been executed");
-
         Properties props = new Properties();
         Session session = Session.getDefaultInstance(props, null);
 
@@ -53,8 +60,8 @@ public void sendmail(UserTtm user){
             Message msg = new MimeMessage(session);
             msg.setFrom(new InternetAddress("pjboceno@gmail.com", "Admin"));
             msg.addRecipient(Message.RecipientType.TO,
-               new InternetAddress("ostcommader@gmail.com", "Mr. User"));
-            msg.setSubject("Est Loser où es-tu ?");
+               new InternetAddress(user.getUser().getEmail(), user.getUser().getNickname()));
+            msg.setSubject("Es-tu un loser ?");
             msg.setText(msgBody);
             Transport.send(msg);
             _logger.info("Envoie mail");
@@ -72,14 +79,31 @@ public void sendmail(UserTtm user){
 
 public void doGet(HttpServletRequest req, HttpServletResponse resp)
 throws IOException {
+    _logger.info("Cron Job has been executed");
     Calendar cal = Calendar.getInstance();
     Date currentDate = cal.getTime();
-    cal.add(Calendar.HOUR_OF_DAY, 1);
-    Date borderDate = cal.getTime();    
-    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-    dateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Paris"));
+    // cal.add(Calendar.HOUR_OF_DAY, 1);
+    // Date borderDate = cal.getTime();
 
     List<UserTtm> users = UserTtmRepository.users();
+    for( UserTtm user : users ){
+        _logger.info("users list boucle");
+        Map subscriptionsUser = user.getSubscriptions();
+        Set listKeys=subscriptionsUser.keySet();  // Obtenir la liste des clés
+        Iterator iterateur=listKeys.iterator();
+        // Parcourir les clés et afficher les entrées de chaque clé;
+        while(iterateur.hasNext())
+        {
+            Object key= iterateur.next();
+            _logger.info(key+"=>"+subscriptionsUser.get(key));
+            Event eventuser = EventRepository.get(String(key));
+            if(subscriptionsUser.get(key) == false && eventuser.getStartDate().compareDate(currentDate) == 0){
+                CronServlet cs = new CronServlet();
+                cs.sendmail(user);
+            }
+
+        }
+    }
 
 }
 
