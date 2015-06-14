@@ -2,8 +2,21 @@ header {
     background-image: url(img/header-bg.jpg) !important;
 }
 
+footer{
+	background-color:#f1f1f1;
+	padding:17px 0 0 0 !important;
+}
+
+footer .row{
+	height:46px !important;
+	line-height:38px !important;
+}
+
 footer .col-md-8 span{
 	float:left;
+	vertical-align:middle;
+	display:inline-block;
+	margin-top:1px;
 }
 
 footer .col-md-4 ul{
@@ -11,7 +24,7 @@ footer .col-md-4 ul{
 }
 
 footer .col-md-4 img{
-	max-width:43px;
+	max-width:41px;
 	height:auto;
 }
 
@@ -108,4 +121,27 @@ footer .col-md-4 a{
 
 #portfolio .timeline-heading h4{
 	border-bottom:1px solid #fed136;
+	text-align:left;
+	margin:0 15px 10px 15px;
+}
+
+div h3.section-subheading {
+  margin-bottom: 75px;
+  text-transform: none;
+  font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.portfolio-modal .modal-content img {
+    margin-bottom: 0px;
+}
+
+#portfolio .portfolio-item .portfolio-caption {
+    background-color: #f1f1f1;
+}
+
+#portfolio .btn-close{
+	margin-right:30px !important;
 }
