@@ -3,13 +3,13 @@
 
 <head>
 
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>CiTropTard | Miage Nantes<</title>
+    <title>CiTropTard | Miage Nantes</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="bower_components/startbootstrap-agency/css/bootstrap.min.css" rel="stylesheet">
@@ -41,7 +41,7 @@
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-user">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -49,472 +49,29 @@
                 </button>
                 <a class="navbar-brand page-scroll" href="#page-top">CiTropTard</a>
             </div>
-            
+
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#about">événements</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll portfolio-link" href="#portfolio" data-toggle="modal">Préférences</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+
+            <!-- if user is signed in -->
+            <div ui-view="navbar-user"></div>
+            <!-- if user comes to confirm an event -->
+            <div ui-view="navbar-back"></div>
         </div>
         <!-- /.container-fluid -->
     </nav>
 
-	<!-- page d'accueil -->
-	<header id="welcome">
-	    <div class="container">
-	        <div class="intro-text">
-	        	<div class="intro-heading">Bienvenue sur l'application CiTropTard !</div>
-	            <div class="intro-lead-in">Le principe est simple, plus vous manquez vos événements favoris, plus vous gagnez ! <br>Ne perdez plus de temps, connectez-vous !</div>
-	            <button type="button" class="page-scroll btn btn-xl" id="signinButton" ng-click="auth()">Se connecter</button>
-	        </div>
-	    </div>
-	</header>
-	
+  <!-- page d'accueil -->
+  <header id="welcome">
+      <div class="container">
+          <div class="intro-text">
+              <div class="intro-heading">Bienvenue sur l'application CiTropTard !</div>
+              <div ui-view="welcome">
+              </div>
+          </div>
+      </div>
+  </header>
 
-	<!-- Liste des événements et meilleurs scores -->
-    <section id="about">
-        <div class="container">
-            <div class="row">
-           		<div class="col-lg-7">
-                    <h2 class="section-heading text-center">événements</h2>
-                    <h3 class="section-subheading text-muted text-center">Vous trouverez tous les événements auxquels vous ne participez pas encore !</h3>
-                
-                    <ul class="timeline">
-                        <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="bower_components/startbootstrap-agency/img/about/1.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>Forum Miage</h4>
-                                    <h5 class="subheading">20/06/2015 - 2 rue de la Houssinière 40000 Nantes</h5>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                                 <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check"></i> S'inscrire</button>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="bower_components/startbootstrap-agency/img/about/2.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>Forum Miage</h4>
-                                    <h5 class="subheading">20/06/2015 - 2 rue de la Houssinière 40000 Nantes</h5>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check"></i> S'inscrire</button>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="bower_components/startbootstrap-agency/img/about/3.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                   <h4>Forum Miage</h4>
-                                    <h5 class="subheading">20/06/2015 - 2 rue de la Houssinière 40000 Nantes</h5>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check"></i> S'inscrire</button>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="bower_components/startbootstrap-agency/img/about/4.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>Forum Miage</h4>
-                                    <h5 class="subheading">20/06/2015 - 2 rue de la Houssinière 40000 Nantes</h5>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check"></i> S'inscrire</button>
-                            </div>
-                        </li>
-                       
-                    </ul>
-                </div>
-            	 <div class="col-lg-5">
-                	<h2 class="section-heading text-center">Meilleurs Scores</h2>
-                	<h3 class="section-subheading text-muted text-center titre-high-score">Plus vous grimpez dans le classement en ratant les événements, plus vous êtes un looser ! </h3>
-                
-                    <ul class="high-score">
-                    	<li>
-                    		<img src="styles/img/citron-1.png">
-	                    		<span>
-	                    			<h4 class="subheading titre-min-cent">Jérémy Klauer</h4><br/>
-	                    			<span class="text-muted">95% d'événements ratés</span>
-	                    		</span>
-	    
-                    	</li>
-                    	
-                    	<li>
-                    		<img src="styles/img/citron-2.png">
-							<span>
-	                    		<h4 class="subheading titre-min-cent">Paul-Jakez Bocéno</h4><br/>
-	                    		<span class="text-muted">85% d'événements ratés</span>
-	                    	</span>	
-							
-                    	</li>
-                    	
-                    	<li>
-                    		<img src="styles/img/citron-3.png">
-                    		<span>
-	                    		<h4 class="subheading titre-min-cent">Margot Bernard</h4><br/>
-	                    		<span class="text-muted">82% d'événements ratés</span>
-	                    	</span>	
-                    		
-                    	</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    
-    
-    <div class="portfolio-modal modal fade bg-light-gray" id="portfolio" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-	            <div class="row">
-	                <div class="col-lg-12 text-center">
-	                    <h2 class="section-heading">Préférences</h2>
-	                    <h3 class="section-subheading text-muted text-center">Séléctionnez vos centres d'intérêts pour visualiser seulement les événements qui vous intéresse !</h3>
-	                </div>
-	            </div>
-	            <div class="row">
-	            	<div class="timeline-heading"><h4>Sport</h4></div>
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/roundicons.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Round Icons</h4>
-	                        <p class="text-muted">Graphic Design</p>
-	                    </div>
-	                </div>
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/startup-framework.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Framework</h4>
-	                        <p class="text-muted">Website Design</p>
-	                    </div>
-	                </div>
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/treehouse.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Treehouse</h4>
-	                        <p class="text-muted">Website Design</p>
-	                    </div>
-	                </div>
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/golden.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Golden</h4>
-	                        <p class="text-muted">Website Design</p>
-	                    </div>
-	                </div>
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/escape.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Escape</h4>
-	                        <p class="text-muted">Website Design</p>
-	                    </div>
-	                </div>
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/dreams.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Dreams</h4>
-	                        <p class="text-muted">Website Design</p>
-	                    </div>
-	                </div>
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/dreams.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Dreams</h4>
-	                        <p class="text-muted">Website Design</p>
-	                    </div>
-	                </div>                
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/dreams.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Dreams</h4>
-	                        <p class="text-muted">Website Design</p>
-	                    </div>
-	                </div>                
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/dreams.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Dreams</h4>
-	                        <p class="text-muted">Website Design</p>
-	                    </div>
-	                </div>                
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/dreams.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Dreams</h4>
-	                        <p class="text-muted">Website Design</p>
-	                    </div>
-	                </div>
-	                <div style="clear:both"></div>
-	                
-	                <div class="timeline-heading"><h4>Musique</h4></div>
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/roundicons.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Round Icons</h4>
-	                        <p class="text-muted">Graphic Design</p>
-	                    </div>
-	                </div>
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/startup-framework.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Framework</h4>
-	                        <p class="text-muted">Website Design</p>
-	                    </div>
-	                </div>
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/treehouse.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Treehouse</h4>
-	                        <p class="text-muted">Website Design</p>
-	                    </div>
-	                </div>
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/golden.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Golden</h4>
-	                        <p class="text-muted">Website Design</p>
-	                    </div>
-	                </div>
-	                <div style="clear:both"></div>
-	                
-	                
-	                <div class="timeline-heading"><h4>Spectacle</h4></div>
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/roundicons.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Round Icons</h4>
-	                        <p class="text-muted">Graphic Design</p>
-	                    </div>
-	                </div>
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/startup-framework.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Framework</h4>
-	                        <p class="text-muted">Website Design</p>
-	                    </div>
-	                </div>
-	                <div style="clear:both"></div>
-	                
-	                
-	                <div class="timeline-heading"><h4>Histoire</h4></div>
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/roundicons.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Round Icons</h4>
-	                        <p class="text-muted">Graphic Design</p>
-	                    </div>
-	                </div>
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="€" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/startup-framework.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Framework</h4>
-	                        <p class="text-muted">Website Design</p>
-	                    </div>
-	                </div>
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/treehouse.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Treehouse</h4>
-	                        <p class="text-muted">Website Design</p>
-	                    </div>
-	                </div>
-	                <div class="col-md-2 col-sm-3 portfolio-item">
-	                    <a href="#" class="portfolio-link">
-	                        <div class="portfolio-hover">
-	                            <div class="portfolio-hover-content">
-	                                <i class="fa fa-plus fa-3x"></i>
-	                            </div>
-	                        </div>
-	                        <img src="bower_components/startbootstrap-agency/img/portfolio/golden.png" class="img-responsive" alt="">
-	                    </a>
-	                    <div class="portfolio-caption">
-	                        <h4>Golden</h4>
-	                        <p class="text-muted">Website Design</p>
-	                    </div>
-	                </div>
-	                <div style="clear:both"></div>
-	            </div>
-	            <button type="button" class="btn btn-primary btn-close" data-dismiss="modal"><i class="fa fa-times"></i> Annuler</button>
-	            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check"></i> Valider</button>
-	        </div>
-	    </div>
-	</div>
-
-    
-    
-    
-    
-    <!-- Les deux couleurs a utilisé pour savoir si le centre d'interet est selectionné sont : #e96656 et #7CC576 -->
-    <!-- Préférences -->
-
+  <div ui-view id="events"></div>
 
     <footer>
         <div class="container">
@@ -537,7 +94,7 @@
             </div>
         </div>
     </footer>
-    
+
 
 
     <!-- JS from bower -->
@@ -545,21 +102,12 @@
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-   
+
 	<!-- JS from troptardmiage -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/services/opendataapi.js"></script>
     <script src="scripts/services/ttmstorageapi.js"></script>
-    
-    <script>
-      var init = function() {
-        console.log("init called");
-        window.init();
-      }
-    </script>
-    <script src="https://apis.google.com/js/client.js?onload=init"></script>
-
 
     <!-- jQuery -->
     <script src="bower_components/startbootstrap-agency/js/jquery.js"></script>
@@ -575,8 +123,14 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="bower_components/startbootstrap-agency/js/agency.js"></script>
-    
 
+    <script>
+      var init = function() {
+        console.log("init called");
+        window.init();
+      }
+    </script>
+    <script src="https://apis.google.com/js/client.js?onload=init"></script>
 
 
 </body>

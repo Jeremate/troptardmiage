@@ -74,11 +74,11 @@ footer .col-md-4 a{
 	text-transform: none;
 }
 
-#about .col-lg-7{
+#events .col-lg-7{
 	border-right:1px solid #f1f1f1;
 }
 
-#about .timeline-body{
+#events .timeline-body{
 	margin-bottom:7px;
 }
 
@@ -87,12 +87,12 @@ footer .col-md-4 a{
         padding-top: 275px !important;
         padding-bottom: 175px !important;
     }
-    
+
         header .intro-text .intro-lead-in {
         font-size: 25px !important;
         font-style: normal !important;
     }
-    
+
         header .intro-text .intro-heading {
         font-size: 45px !important;
     }
@@ -106,24 +106,24 @@ footer .col-md-4 a{
     .timeline:before {
         left: 12% !important;
     }
-    
+
     .timeline>li .timeline-panel {
         text-align: left !important;
         padding-left:28%;
          width: 100%;
     }
-    
+
     .timeline>li .timeline-image {
         left: 12% !important;
     }
-    
+
     .timeline>li {
         margin-bottom: 50px;
         min-height: 100px;
     }
 }
 
-#portfolio .timeline-heading h4{
+#preferences .timeline-heading h4{
 	border-bottom:1px solid #fed136;
 	text-align:left;
 	margin:0 15px 10px 15px;
@@ -142,11 +142,11 @@ div h3.section-subheading {
     margin-bottom: 0px;
 }
 
-#portfolio .portfolio-item .portfolio-caption {
+#preferences .portfolio-item .portfolio-caption {
     background-color: #f1f1f1;
 }
 
-#portfolio .btn-close, .confirm-event .btn-close{
+#preferences .btn-close, .confirm-event .btn-close{
 	margin-right:30px !important;
 }
 

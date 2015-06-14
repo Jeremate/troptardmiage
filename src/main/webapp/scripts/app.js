@@ -5,14 +5,14 @@ var ttmApp = angular.module('troptardmiage', [
 ]);
 
 ttmApp.config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('main');
+    $urlRouterProvider.otherwise('welcome');
 
     $stateProvider
-    .state('main', {
+    .state('welcome', {
        url: '/',
        views: {
          '': {
-            templateUrl: 'views/main.html'
+            templateUrl: 'views/welcome.html'
          }
        }
     })
@@ -28,15 +28,15 @@ ttmApp.config(function ($stateProvider, $urlRouterProvider) {
             }
         }
     })
-    
+
     .state('confirm-event', {
        url: '/confirm-event',
        views: {
             '': {
-                templateUrl: 'views/confirm-event.html'
+                templateUrl: 'views/confirmevent.html'
             },
-            'navbar-user': {
-                templateUrl: 'views/navbaruser.html'
+            'navbar-back': {
+                templateUrl: 'views/navbarback.html'
             }
         }
     });
