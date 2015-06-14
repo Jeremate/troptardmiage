@@ -27,5 +27,17 @@ ttmApp.config(function ($stateProvider, $urlRouterProvider) {
                 templateUrl: 'views/navbaruser.html'
             }
         }
+    })
+    
+    .state('confirm-event', {
+       url: '/confirm-event',
+       views: {
+            '': {
+                templateUrl: 'views/confirm-event.html'
+            },
+            'navbar-user': {
+                templateUrl: 'views/navbaruser.html'
+            }
+        }
     });
 });
