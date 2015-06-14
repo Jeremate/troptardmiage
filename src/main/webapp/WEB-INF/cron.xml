@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+  <cron>
+    <url>/cron/cronjobmail</url>
+    <description>Envoie une demande de localisation par e-mail aux utilisateurs qui ont un evenement en cours</description>
+    <schedule>every 5 minutes</schedule>
+  </cron>
+</cronentries>
