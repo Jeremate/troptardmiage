@@ -2,7 +2,6 @@ package fr.miagenantes.troptardmiage.endpoints;
 
 import java.text.ParseException;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 import com.google.api.server.spi.config.Api;

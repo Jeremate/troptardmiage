@@ -11,7 +11,7 @@ ttmApp.config(function ($stateProvider, $urlRouterProvider) {
     .state('welcome', {
        url: '/',
        views: {
-         '': {
+         'welcome': {
             templateUrl: 'views/welcome.html'
          }
        }
