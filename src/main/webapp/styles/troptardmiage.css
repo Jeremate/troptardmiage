@@ -78,6 +78,10 @@ footer .col-md-4 a{
 	border-right:1px solid #f1f1f1;
 }
 
+#about .timeline-body{
+	margin-bottom:7px;
+}
+
 @media(min-width:768px) {
     header .intro-text {
         padding-top: 275px !important;
