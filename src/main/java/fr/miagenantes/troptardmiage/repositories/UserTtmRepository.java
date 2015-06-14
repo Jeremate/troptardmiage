@@ -41,6 +41,10 @@ public class UserTtmRepository {
         return ofy().load().type(UserTtm.class).id(id).now();
     }
     
+    public static List<UserTtm> users() {
+        return ofy().load().type(UserTtm.class).list();
+    }
+
     public Set<UserTtm> losers() {
         List<UserTtm> userTtms = ofy().load().type(UserTtm.class).list();
         Map<Long, Boolean> events;
