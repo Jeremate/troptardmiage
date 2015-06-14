@@ -146,6 +146,38 @@ div h3.section-subheading {
     background-color: #f1f1f1;
 }
 
-#portfolio .btn-close{
+#portfolio .btn-close, .confirm-event .btn-close{
 	margin-right:30px !important;
+}
+
+
+
+
+.navbar-black{
+	padding: 10px 0 !important;
+  	background-color: #222;
+}
+.navbar-black>.container>.navbar-header>.navbar-brand{
+	font-size: 1.5em;
+}
+.confirm-event{
+	padding:125px 0;
+}
+.confirm-event .timeline{
+	min-height:170px;
+	margin-bottom:20px;
+}
+.confirm-event .timeline-panel{
+	padding-left:23% !important;
+	width:95% !important;
+}
+.confirm-event .btn-confirm{
+	text-align:center;
+}
+.footer-confirm-event{
+	position: fixed;
+  	left: 0;
+  	right: 0;
+  	width: 100%;
+ 	bottom: 0;
 }
