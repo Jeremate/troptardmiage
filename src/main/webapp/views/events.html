@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-7">
-                    <h2 class="section-heading text-center">Événements</h2>
+                    <h2 class="section-heading text-center">événements</h2>
                     <h3 class="section-subheading text-muted text-center">Vous trouverez tous les événements auxquels vous ne participez pas encore !</h3>
 
                     <ul class="timeline">
@@ -74,7 +74,7 @@
                  <button type="button" class="btn btn-primary" ng-click="subscribe(events[0])">SUBSCRIBE</button>
                 <button type="button" class="btn btn-primary" ng-click="loadLosers()">LOAD LOSERS</button>
                     <h2 class="section-heading text-center">Meilleurs Scores</h2>
-                    <h3 class="section-subheading text-muted text-center titre-high-score">Plus vous grimpez dans le classement en ratant les événements, plus vous êtes un loser ! </h3>
+                    <h3 class="section-subheading text-muted text-center titre-high-score">Plus vous grimpez dans le classement en ratant les Ã©vÃ©nements, plus vous Ãªtes un loser ! </h3>
 
                     <ul class="high-score" ng-repeat="(key, percentage) in losers">
                         <li>
@@ -88,8 +88,8 @@
                        <!--  <li>
                             <img src="styles/img/citron-2.png">
                             <span>
-                                <h4 class="subheading titre-min-cent">Paul-Jakez Bocéno</h4><br/>
-                                <span class="text-muted">85% d'événements ratés</span>
+                                <h4 class="subheading titre-min-cent">Paul-Jakez BocÃ©no</h4><br/>
+                                <span class="text-muted">85% d'Ã©vÃ©nements ratÃ©s</span>
                             </span>
 
                         </li>
@@ -98,7 +98,7 @@
                             <img src="styles/img/citron-3.png">
                             <span>
                                 <h4 class="subheading titre-min-cent">Margot Bernard</h4><br/>
-                                <span class="text-muted">82% d'événements ratés</span>
+                                <span class="text-muted">82% d'Ã©vÃ©nements ratÃ©s</span>
                             </span>
 
                         </li> -->
@@ -109,8 +109,8 @@
     </section>
 
 
-    <!-- Les deux couleurs a utilisé pour savoir si le centre d'interet est selectionné sont : #e96656 et #7CC576 -->
-    <!-- Préférences -->
+    <!-- Les deux couleurs a utilisÃ© pour savoir si le centre d'interet est selectionnÃ© sont : #e96656 et #7CC576 -->
+    <!-- PrÃ©fÃ©rences -->
     <div class="portfolio-modal modal fade bg-light-gray" id="portfolio" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <!-- <div class="close-modal" data-dismiss="modal">
@@ -123,7 +123,7 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <h2 class="section-heading">Préférences</h2>
-                        <h3 class="section-subheading text-muted text-center">Séléctionnez vos centres d'intérêts pour visualiser seulement les événements qui vous intéressent !</h3>
+                        <h3 class="section-subheading text-muted text-center">Séléctionnez vos centres d'interêts pour visualiser seulement les événements qui vous intéressent !</h3>
                     </div>
                 </div>
                 <div class="row" ng-repeat="themeMere in themes">
@@ -137,7 +137,9 @@
                                     <i class="fa fa-plus fa-3x"></i>
                                 </div>
                             </div>
-                            <img ng-src="{{theme.icon || themeMere.icon}}" class="img-responsive" alt="">
+                            <div class="image-portfolio">
+                           		<img ng-src="{{theme.icon || themeMere.icon}}" class="img-responsive" alt="">
+                            </div>
                         </a>
                         <div class="portfolio-caption">
                             <h4 ng-bind="theme.name"></h4>

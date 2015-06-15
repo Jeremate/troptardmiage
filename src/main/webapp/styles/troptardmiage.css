@@ -150,6 +150,24 @@ div h3.section-subheading {
 	margin-right:30px !important;
 }
 
+.portfolio-caption{
+	min-height:88px;
+}
+
+.portfolio-link{
+	min-height:165px;
+}
+.image-portfolio{
+	width: 165px;
+  	height: 165px;
+  	line-height: 165px;
+  	text-align: center;
+}
+.image-portfolio img{
+	margin: auto;
+ 	vertical-align: middle;
+  	display: inline-block;
+}
 
 
 
