@@ -3,78 +3,36 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-7">
-                    <h2 class="section-heading text-center">événements</h2>
-                    <h3 class="section-subheading text-muted text-center">Vous trouverez tous les événements auxquels vous ne participez pas encore !</h3>
+                    <h2 class="section-heading text-center">Événements</h2>
+                    <h3 class="section-subheading text-muted text-center">Vous trouverez tous les événements qui pourraient vous intéresser !<br/>Inscrivez-vous et vous recevrez une notification la veille de l'événement.</h3>
 
-                    <ul class="timeline">
+                    <ul class="timeline" ng-repeat="event in events">
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="bower_components/startbootstrap-agency/img/about/1.jpg" alt="">
+                                <img class="img-circle img-responsive" ng-src="{{event.image || event.category[event.category.length-1].icon}}" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4>Forum Miage</h4>
-                                    <h5 class="subheading">20/06/2015 - 2 rue de la Houssinière 40000 Nantes</h5>
+                                    <h4 ng-bind="event.title"></h4>
+                                    <h5 class="subheading">
+                                        <span ng-bind="event.startDate"></span> au <span ng-bind="event.endDate"></span> à <span ng-bind="event.city.title"></span>
+                                    </h5>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                    <p class="text-muted" ng-bind="event.line1"></p>
+                                    <p class="text-muted" ng-bind="event.line2"></p>
+                                    <p class="text-info" ng-bind="event.line3"></p>
                                 </div>
-                                 <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check"></i> S'inscrire</button>
+                                 <button type="button" class="btn btn-primary" ng-click="subscribe(event)"><i class="fa fa-check"></i> S'inscrire</button>
                             </div>
                         </li>
-                        <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="bower_components/startbootstrap-agency/img/about/2.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>Forum Miage</h4>
-                                    <h5 class="subheading">20/06/2015 - 2 rue de la Houssinière 40000 Nantes</h5>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check"></i> S'inscrire</button>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="bower_components/startbootstrap-agency/img/about/3.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                   <h4>Forum Miage</h4>
-                                    <h5 class="subheading">20/06/2015 - 2 rue de la Houssinière 40000 Nantes</h5>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check"></i> S'inscrire</button>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="bower_components/startbootstrap-agency/img/about/4.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>Forum Miage</h4>
-                                    <h5 class="subheading">20/06/2015 - 2 rue de la Houssinière 40000 Nantes</h5>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                                </div>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check"></i> S'inscrire</button>
-                            </div>
-                        </li>
-
                     </ul>
                 </div>
-                 <div class="col-lg-5">
-                 <button type="button" class="btn btn-primary" ng-click="subscribe(events[0])">SUBSCRIBE</button>
-                <button type="button" class="btn btn-primary" ng-click="loadLosers()">LOAD LOSERS</button>
+
+                <div class="col-lg-5">
                     <h2 class="section-heading text-center">Meilleurs Scores</h2>
-                    <h3 class="section-subheading text-muted text-center titre-high-score">Plus vous grimpez dans le classement en ratant les Ã©vÃ©nements, plus vous Ãªtes un loser ! </h3>
+                    <h3 class="section-subheading text-muted text-center titre-high-score">Plus vous grimpez dans le classement en ratant les événements, plus vous êtes un loser ! </h3>
+                    <button type="button" class="btn btn-primary center-block" ng-click="loadLosers()"><i class="fa fa-refresh"></i></button>
 
                     <ul class="high-score" ng-repeat="(key, percentage) in losers">
                         <li>
@@ -88,8 +46,8 @@
                        <!--  <li>
                             <img src="styles/img/citron-2.png">
                             <span>
-                                <h4 class="subheading titre-min-cent">Paul-Jakez BocÃ©no</h4><br/>
-                                <span class="text-muted">85% d'Ã©vÃ©nements ratÃ©s</span>
+                                <h4 class="subheading titre-min-cent">Paul-Jakez Bocéno</h4><br/>
+                                <span class="text-muted">85% d'événements ratés</span>
                             </span>
 
                         </li>
@@ -98,7 +56,7 @@
                             <img src="styles/img/citron-3.png">
                             <span>
                                 <h4 class="subheading titre-min-cent">Margot Bernard</h4><br/>
-                                <span class="text-muted">82% d'Ã©vÃ©nements ratÃ©s</span>
+                                <span class="text-muted">82% d'événements ratés</span>
                             </span>
 
                         </li> -->
@@ -109,8 +67,8 @@
     </section>
 
 
-    <!-- Les deux couleurs a utilisÃ© pour savoir si le centre d'interet est selectionnÃ© sont : #e96656 et #7CC576 -->
-    <!-- PrÃ©fÃ©rences -->
+    <!-- Les deux couleurs à utiliser pour savoir si le centre d'interet est selectionné sont : #7CC576 -->
+    <!-- Préférences -->
     <div class="portfolio-modal modal fade bg-light-gray" id="portfolio" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <!-- <div class="close-modal" data-dismiss="modal">

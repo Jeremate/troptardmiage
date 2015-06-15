@@ -61,7 +61,8 @@ ttmApp.factory('ttmStorageApi', ['$http', function($http){
 				return;
 			}
 			event.cityName = event.city.title;
-			event.themeId = event.category[0].id;
+			// event.themeId = event.category[0].id;//for non detailed event
+			event.themeId = event.category[event.category.length-1].id;// for detailed event
 			gapi.client.troptardmiage.users.subscribe(event).execute(callback);
 		},
 

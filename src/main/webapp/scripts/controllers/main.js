@@ -70,6 +70,7 @@ ttmApp.controller('MainCtrl', [
 				if (!resp.code) {
 					console.log("authentification réussie");
 					$scope.signedIn = true;
+					$scope.userpicture = resp.picture;
 					$scope.myUser();
 					$scope.loadODThemes();
 					$scope.loadLosers();
@@ -118,11 +119,19 @@ ttmApp.controller('MainCtrl', [
 		    }
 	    }
 
+		/**
+	     * Load Open Data events with detail for the region Loire Altlantique
+	     */
 	    $scope.loadODEvents = function(themeId) {
 	    	console.log("loading open data events");
 	    	openDataApi.events(themeId, 1, function(data) {
-	    		console.log(data);
-	    		$scope.events = $scope.events.concat(data.data);
+	    		// console.log(data);
+	    		angular.forEach(data.data, function(value, key){
+	    			openDataApi.eventDetailed(value.eventId, function(data) {
+	    				// console.log(data);
+	    				$scope.events.push(data);
+	    			});
+	    		});
 	    	});
 	    }
 
@@ -153,6 +162,7 @@ ttmApp.controller('MainCtrl', [
 	    			console.log("getting losers");
 	    			// $scope.losers = res.items;
 	    			$scope.losers = res.result;
+	    			$scope.$apply();
 	    		} else {
 	    			console.log(res);
 	    		}

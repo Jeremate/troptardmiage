@@ -208,3 +208,13 @@ div h3.section-subheading {
   	width: 100%;
  	bottom: 0;
 }
+
+.userpicture {
+    width: 45px;
+}
+
+.timeline-image > img {
+    display: block;
+    height: inherit;
+    max-width: 100%;
+}
