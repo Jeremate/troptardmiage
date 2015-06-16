@@ -82,6 +82,10 @@ footer .col-md-4 a{
 	margin-bottom:7px;
 }
 
+.icon-deconnexion a{
+	float:left !important;
+}
+
 @media(min-width:768px) {
     header .intro-text {
         padding-top: 275px !important;
