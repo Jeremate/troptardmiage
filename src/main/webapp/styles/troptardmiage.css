@@ -185,6 +185,9 @@ div h3.section-subheading {
   	display: inline-block;
 }
 
+.selected-theme {
+    background-color: #7CC576 !important;
+}
 
 
 .navbar-black{

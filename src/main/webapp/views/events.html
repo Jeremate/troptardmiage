@@ -6,7 +6,8 @@
                     <h2 class="section-heading text-center">Événements</h2>
                     <h3 class="section-subheading text-muted text-center">Vous trouverez tous les événements qui pourraient vous intéresser !<br/>Inscrivez-vous et vous recevrez une notification la veille de l'événement.</h3>
 
-                    <p ng-show="events.length == 0" class="text-info text-center">Choisissez vos préférences et nous vous proposerons des événements !</p>
+                    <p ng-show="events.length == 0 && selectedThemes.length == 0" class="text-info text-center">Choisissez vos préférences et nous vous proposerons des événements !</p>
+                    <p ng-show="events.length == 0 && selectedThemes.length > 0" class="text-info text-center">Désolé, il n'y a aucun événement correspond à vos préférences !</p>
                     <ul class="timeline" ng-repeat="event in events">
                         <li>
                             <div class="timeline-image">
@@ -42,7 +43,6 @@
                                     <h4 class="subheading titre-min-cent" ng-bind="key"></h4><br/>
                                     <p class="text-muted"><span ng-bind="percentage"></span> % d'événements ratés</p>
                                 </span>
-
                         </li>
                     </ul>
                 </div>
@@ -83,14 +83,14 @@
                            		<img ng-src="{{theme.icon || themeMere.icon}}" class="img-responsive" alt="">
                             </div>
                         </a>
-                        <div class="portfolio-caption">
+                        <div class="portfolio-caption" id="{{theme.id}}" ng-class="{'selected-theme': theme.selected}">
                             <h4 ng-bind="theme.name"></h4>
                         </div>
                     </div>
                     <div style="clear:both;margin-bottom: 20px;"></div>
                 </div>
                 <div style="clear:both"></div>
-                <!-- <button type="button" class="btn btn-primary btn-close" data-dismiss="modal" ng-click="cancelSelectedThemes()"><i class="fa fa-times"></i> Annuler</button> -->
+                <button type="button" class="btn btn-primary btn-close" data-dismiss="modal" ng-click="cancelSelectedThemes()"><i class="fa fa-times"></i> Annuler</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="validateSelectedThemes()"><i class="fa fa-check"></i> Valider</button>
             </div>
         </div>
