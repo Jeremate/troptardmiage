@@ -65,5 +65,13 @@ ttmApp.factory('ttmStorageApi', ['$http', function($http){
 			gapi.client.troptardmiage.users.unsubscribe(event).execute(callback);
 		}
 
+		confirmEvent: function(event, callback) {
+			if (!this.isBackendReady) {
+				console.log(NOT_READY_MESSAGE);
+				return;
+			}
+			gapi.client.troptardmiage.users.confirmEvent(event).execute(callback);
+		}
+
 	};
 }])

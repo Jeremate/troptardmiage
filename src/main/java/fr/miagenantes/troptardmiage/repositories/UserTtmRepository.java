@@ -138,5 +138,16 @@ public class UserTtmRepository {
 		
 		return userTtm;
 	}
- 
+
+    public UserTtm confirmEvent(String userId, String eventId) {
+        UserTtm userTtm = get(userId);
+        Event evt = EventRepository.getInstance().get(eventId);
+        userTtm.confirmEvent(evt.getId());
+        
+        ofy().save().entity(userTtm).now();
+        
+        return userTtm;
+    }
+
+
 }

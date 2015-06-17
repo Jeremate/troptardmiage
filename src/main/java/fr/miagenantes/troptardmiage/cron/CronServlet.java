@@ -47,12 +47,12 @@ import java.util.Set;
 public class CronServlet extends HttpServlet {
 private static final Logger _logger = Logger.getLogger(CronServlet.class.getName());
 
-public void sendmail(UserTtm user){
+public void sendmail(UserTtm user ,Event event){
     try {
         Properties props = new Properties();
         Session session = Session.getDefaultInstance(props, null);
-
-        String msgBody = "Je participe à l'événnement, je le jure.";
+        String url = "http://troptardmiage.appspot.com/confirm-event/"+event.getId();
+        String msgBody = "Je suis actuellement sur les lieux de l'event, la vie de looser ne m'intéresse plus. "+url;
 
         try {
             Message msg = new MimeMessage(session);
@@ -101,7 +101,7 @@ throws IOException {
 	            if(!subscriptions.get(eventKey) && eventuser.getStartDate().compareTo(currentDate) == 0){
 	                CronServlet cs = new CronServlet();
 	                _logger.info("sending mail to "+user.getUser().getEmail());
-	                cs.sendmail(user);
+	                cs.sendmail(user, eventuser);
 	            }
             }
         }
@@ -116,38 +116,4 @@ public void doPost(HttpServletRequest req, HttpServletResponse resp)
     }
 }
 
-
-
-
-
-// @SuppressWarnings("serial")
-// public class CronServlet extends HttpServlet {
-
-//   public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-//       Properties props = new Properties();
-//         Session session = Session.getDefaultInstance(props, null);
-
-//         String msgBody = "...";
-
-//         try {
-//             Message msg = new MimeMessage(session);
-//             msg.setFrom(new InternetAddress("pjboceno@gmail.com", "Admin"));
-//             msg.addRecipient(Message.RecipientType.TO,
-//                              new InternetAddress("ostcommader@gmail.com", "Mr. User"));
-//             msg.setSubject("Test d'envoie de mail");
-//             msg.setText(msgBody);
-//             Transport.send(msg);
-
-//         } catch (AddressException e) {
-//            // ...
-//        } catch (MessagingException e) {
-//            // ...
-//     }
-//   }
-// }
-
-
-
-
-        
+       

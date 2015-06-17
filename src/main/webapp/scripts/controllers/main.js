@@ -164,4 +164,13 @@ ttmApp.controller('MainCtrl', [
 	    		// $scope.user = res.result;
 	    	})
 	    }
+
+	    $scope.confirmEvent = function(event) {
+	    	console.log("confirmEvent");
+	    	ttmStorageApi.confirmEvent(event, function(res) {
+	    		console.log(res);
+	    		if(!res.code) {}
+	    		// $scope.user = res.result;
+	    	})
+	    }
 	}]);
