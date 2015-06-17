@@ -1,1 +1,113 @@
-<p class="well">Coming soon</p>
+<!-- Liste des événements et meilleurs scores -->
+    <section id="events">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <h2 class="section-heading text-center">Événements</h2>
+                    <h3 class="section-subheading text-muted text-center">Vous trouverez tous les événements qui pourraient vous intéresser !<br/>Inscrivez-vous et vous recevrez une notification la veille de l'événement.</h3>
+
+                    <ul class="timeline" ng-repeat="event in events">
+                        <li>
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" ng-src="{{event.image || event.category[event.category.length-1].icon}}" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 ng-bind="event.title"></h4>
+                                    <h5 class="subheading">
+                                        <span ng-bind="event.startDate"></span> au <span ng-bind="event.endDate"></span> à <span ng-bind="event.city.title"></span>
+                                    </h5>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted" ng-bind="event.line1"></p>
+                                    <p class="text-muted" ng-bind="event.line2"></p>
+                                    <p class="text-info" ng-bind="event.line3"></p>
+                                </div>
+                                 <button type="button" class="btn btn-primary" ng-click="subscribe(event)"><i class="fa fa-check"></i> S'inscrire</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-5">
+                    <h2 class="section-heading text-center">Meilleurs Scores</h2>
+                    <h3 class="section-subheading text-muted text-center titre-high-score">Plus vous grimpez dans le classement en ratant les événements, plus vous êtes un loser ! </h3>
+                    <button type="button" class="btn btn-primary center-block" ng-click="loadLosers()"><i class="fa fa-refresh"></i></button>
+
+                    <ul class="high-score" ng-repeat="(key, percentage) in losers">
+                        <li>
+                            <img src="styles/img/citron-1.png">
+                                <span>
+                                    <h4 class="subheading titre-min-cent" ng-bind="key"></h4><br/>
+                                    <p class="text-muted"><span ng-bind="percentage"></span> % d'événements ratés</p>
+                                </span>
+
+                        </li>
+                       <!--  <li>
+                            <img src="styles/img/citron-2.png">
+                            <span>
+                                <h4 class="subheading titre-min-cent">Paul-Jakez Bocéno</h4><br/>
+                                <span class="text-muted">85% d'événements ratés</span>
+                            </span>
+
+                        </li>
+
+                        <li>
+                            <img src="styles/img/citron-3.png">
+                            <span>
+                                <h4 class="subheading titre-min-cent">Margot Bernard</h4><br/>
+                                <span class="text-muted">82% d'événements ratés</span>
+                            </span>
+
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Les deux couleurs à utiliser pour savoir si le centre d'interet est selectionné sont : #7CC576 -->
+    <!-- Préférences -->
+    <div class="portfolio-modal modal fade bg-light-gray" id="portfolio" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <!-- <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div> -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading">Préférences</h2>
+                        <h3 class="section-subheading text-muted text-center">Séléctionnez vos centres d'interêts pour visualiser seulement les événements qui vous intéressent !</h3>
+                    </div>
+                </div>
+                <div class="row" ng-repeat="themeMere in themes">
+                    <div class="timeline-heading">
+                        <h4 ng-bind="themeMere.name"></h4>
+                    </div>
+                    <div class="col-md-2 col-sm-3 portfolio-item" ng-repeat="theme in themeMere.children">
+                        <a href="#" class="portfolio-link" ng-click="manageSelectedThemes(theme)">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content">
+                                    <i class="fa fa-plus fa-3x"></i>
+                                </div>
+                            </div>
+                            <div class="image-portfolio">
+                           		<img ng-src="{{theme.icon || themeMere.icon}}" class="img-responsive" alt="">
+                            </div>
+                        </a>
+                        <div class="portfolio-caption">
+                            <h4 ng-bind="theme.name"></h4>
+                        </div>
+                    </div>
+                    <div style="clear:both;margin-bottom: 20px;"></div>
+                </div>
+                <div style="clear:both"></div>
+                <!-- <button type="button" class="btn btn-primary btn-close" data-dismiss="modal" ng-click="cancelSelectedThemes()"><i class="fa fa-times"></i> Annuler</button> -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="validateSelectedThemes()"><i class="fa fa-check"></i> Valider</button>
+            </div>
+        </div>
+    </div>

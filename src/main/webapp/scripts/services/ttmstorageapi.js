@@ -47,13 +47,22 @@ ttmApp.factory('ttmStorageApi', ['$http', function($http){
 			gapi.client.troptardmiage.users.addTheme(theme).execute(callback);
 		},
 
+		removeUserTheme: function(theme, callback) {
+			if (!this.isBackendReady) {
+				console.log(NOT_READY_MESSAGE);
+				return;
+			}
+			gapi.client.troptardmiage.users.removeTheme(theme).execute(callback);
+		},
+
 		subscribe: function(event, callback) {
 			if (!this.isBackendReady) {
 				console.log(NOT_READY_MESSAGE);
 				return;
 			}
 			event.cityName = event.city.title;
-			event.themeId = event.category[0].id;
+			// event.themeId = event.category[0].id;//for non detailed event
+			event.themeId = event.category[event.category.length-1].id;// for detailed event
 			gapi.client.troptardmiage.users.subscribe(event).execute(callback);
 		},
 
