@@ -58,4 +58,9 @@ public class UserTtm {
 		this.themes = themes;
 		return this;
 	}
+	public UserTtm confirmEvent(String eventId) {
+		this.subscriptions.remove(eventId);
+		this.subscriptions.put(eventId,Boolean.TRUE);
+		return this;
+	}
 }
