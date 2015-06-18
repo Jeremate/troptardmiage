@@ -69,6 +69,7 @@ _Si Eclipse a rajouté des fichiers (.project, .classpath, etc...), spécifier �
 - Indiquer le chargement par un spin ou équivalent
 - Permettre de voir la liste de ses inscriptions
 - Afficher des messages d'erreur en cas d'incidents
+- Réaliser une pagination des événements
 
 [0]: https://troptardmiage.appspot.com
 [1]: https://developers.google.com/appengine

@@ -1,7 +1,7 @@
 'use strict';
 
 ttmApp.controller('MainCtrl', [
-	'$scope', '$window', '$state', 'openDataApi', 'ttmStorageApi', function($scope, $window, $state, openDataApi, ttmStorageApi){
+	'$scope', '$window', '$state', 'openDataApi', 'ttmStorageApi', function($scope, $window, $state, openDataApi, ttmStorageApi) {
 
 		//variables
 		ttmStorageApi.isBackendReady = false;
@@ -124,7 +124,7 @@ ttmApp.controller('MainCtrl', [
 	    				// console.log(data);
 	    				$scope.events.push(data);
 	    				if($scope.isEventSubscribed(data.eventId)) {
-	    					console.log(data);
+	    					// console.log(data);
 	    					data.subscribed = true;
 	    				}
 	    			});
@@ -134,14 +134,16 @@ ttmApp.controller('MainCtrl', [
 
 	    $scope.subscribe = function(event) {
 	    	console.log("subscribe");
+	    	// need a hack to select the right category/theme
+	    	chooseRightTheme(event);
 	    	ttmStorageApi.subscribe(event, function(res) {
 	    		if(!res.code) {
 	    			$scope.user = res.result;
-	    			event.subscribed = true;
 	    		} else {
 	    			console.log(res);
 	    		}
 	    	});
+	    	event.subscribed = true;
 	    }
 
 	    $scope.unsubscribe = function(event) {
@@ -149,14 +151,14 @@ ttmApp.controller('MainCtrl', [
 	    	ttmStorageApi.unsubscribe(event, function(res) {
 	    		if(!res.code) {
 	    			$scope.user = res.result;
-	    			event.subscribed = false;
 	    		} else {
 	    			console.log(res);
 	    		}
 	    	});
+	    	event.subscribed = false;
 	    }
 
-	    $scope.isEventSubscribed = function(eventId){
+	    $scope.isEventSubscribed = function(eventId) {
 	    	var match = false;
 	    	if($scope.user.hasOwnProperty("subscriptions")) {
 	    		var userEventIds = Object.keys($scope.user.subscriptions);
@@ -178,6 +180,29 @@ ttmApp.controller('MainCtrl', [
 	    			}
 	    		});
 	    	}
+	    }
+
+	    $scope.confirmEvent = function(event) {
+	    	console.log("confirmEvent");
+	    	ttmStorageApi.confirmEvent(event, function(res) {
+	    		if(!res.code) {
+	    			console.log("event confirmed");
+	    			$scope.user = res.result;
+	    		} else {
+					console.log(res);
+	    		}
+	    	});
+	    }
+
+	    var chooseRightTheme = function(event) {
+	    	angular.forEach(event.category, function(theme, key){
+	    		//same order in user.themes than selectedThemes
+	    		var index = $.inArray(theme.id, $scope.user.themes, 0);
+	    		if(index >= 0) {
+	    			//should always be >= 0
+	    			event.category.push($scope.selectedThemes[index]);
+	    		}
+	    	});
 	    }
 
 
@@ -276,7 +301,6 @@ ttmApp.controller('MainCtrl', [
 	    	});
 	    }
 
-<<<<<<< HEAD
 	    // ---------------------------------------------------------
 	    // --------------- Part on losers --------------------------
 	    // ---------------------------------------------------------
@@ -291,14 +315,7 @@ ttmApp.controller('MainCtrl', [
 	    		} else {
 	    			console.log(res);
 	    		}
-=======
-	    $scope.confirmEvent = function(event) {
-	    	console.log("confirmEvent");
-	    	ttmStorageApi.confirmEvent(event, function(res) {
-	    		console.log(res);
-	    		if(!res.code) {}
-	    		// $scope.user = res.result;
->>>>>>> 78a45b2fad28bb6d765d9e7d8999cef39871e5d1
 	    	});
 	    }
+
 	}]);
