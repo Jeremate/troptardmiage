@@ -107,6 +107,84 @@ ttmApp.controller('MainCtrl', [
 
 	    // --------------- end authentication part ---------------
 
+
+	    // ---------------------------------------------------------
+	    // --------------- Part on events --------------------------
+	    // ---------------------------------------------------------
+
+		/**
+	     * Load Open Data events with detail for the region Loire Altlantique
+	     */
+	    $scope.loadODEvents = function(themeId) {
+	    	console.log("loading open data events");
+	    	openDataApi.events(themeId, 1, function(data) {
+	    		// console.log(data);
+	    		angular.forEach(data.data, function(event, key){
+	    			openDataApi.eventDetailed(event.eventId, function(data) {
+	    				// console.log(data);
+	    				$scope.events.push(data);
+	    				if($scope.isEventSubscribed(data.eventId)) {
+	    					console.log(data);
+	    					data.subscribed = true;
+	    				}
+	    			});
+	    		});
+	    	});
+	    }
+
+	    $scope.subscribe = function(event) {
+	    	console.log("subscribe");
+	    	ttmStorageApi.subscribe(event, function(res) {
+	    		if(!res.code) {
+	    			$scope.user = res.result;
+	    			event.subscribed = true;
+	    		} else {
+	    			console.log(res);
+	    		}
+	    	});
+	    }
+
+	    $scope.unsubscribe = function(event) {
+	    	console.log("unsubscribe");
+	    	ttmStorageApi.unsubscribe(event, function(res) {
+	    		if(!res.code) {
+	    			$scope.user = res.result;
+	    			event.subscribed = false;
+	    		} else {
+	    			console.log(res);
+	    		}
+	    	});
+	    }
+
+	    $scope.isEventSubscribed = function(eventId){
+	    	var match = false;
+	    	if($scope.user.hasOwnProperty("subscriptions")) {
+	    		var userEventIds = Object.keys($scope.user.subscriptions);
+	    		if($.inArray(eventId, userEventIds, 0) >= 0) {
+	    			match = true;
+	    		}
+	    	}
+	    	return match;
+	    }
+
+	    $scope.preSelectEvents = function() {
+	    	if($scope.user.hasOwnProperty("subscriptions")) {
+	    		console.log("yes");
+	    		var userEventIds = Object.keys($scope.user.subscriptions);
+	    		angular.forEach($scope.events, function(event, key) {
+	    			if($.inArray(event.eventId, userEventIds, 0)) {
+	    				console.log(event);
+	    				event.subscribed = true;
+	    			}
+	    		});
+	    	}
+	    }
+
+
+	    // ---------------------------------------------------------
+	    // --------------- Part on themes --------------------------
+	    // ---------------------------------------------------------
+
 	    /**
 	     * Load Open Data categories for the region Loire Altlantique
 	     */
@@ -119,61 +197,6 @@ ttmApp.controller('MainCtrl', [
 		    	});
 		    }
 	    }
-
-		/**
-	     * Load Open Data events with detail for the region Loire Altlantique
-	     */
-	    $scope.loadODEvents = function(themeId) {
-	    	console.log("loading open data events");
-	    	openDataApi.events(themeId, 1, function(data) {
-	    		// console.log(data);
-	    		angular.forEach(data.data, function(value, key){
-	    			openDataApi.eventDetailed(value.eventId, function(data) {
-	    				// console.log(data);
-	    				$scope.events.push(data);
-	    			});
-	    		});
-	    	});
-	    }
-
-	    $scope.subscribe = function(event) {
-	    	console.log("subscribe");
-	    	ttmStorageApi.subscribe(event, function(res) {
-	    		if(!res.code) {
-	    			$scope.user = res.result;
-	    		} else {
-	    			console.log(res);
-	    		}
-	    	});
-	    }
-
-	    $scope.unsubscribe = function(event) {
-	    	console.log("unsubscribe");
-	    	ttmStorageApi.unsubscribe(event, function(res) {
-	    		console.log(res);
-	    		if(!res.code) {}
-	    		$scope.user = res.result;
-	    	});
-	    }
-
-	    $scope.loadLosers = function() {
-	    	console.log("loadLosers");
-	    	ttmStorageApi.losers(function(res) {
-	    		if(!res.code) {
-	    			console.log("getting losers");
-	    			// $scope.losers = res.items;
-	    			$scope.losers = res.result;
-	    			$scope.$apply();
-	    		} else {
-	    			console.log(res);
-	    		}
-	    	});
-	    }
-
-
-	    // ---------------------------------------------------------
-	    // --------------- Part on selected themes -----------------
-	    // ---------------------------------------------------------
 
 	    $scope.manageSelectedThemes = function(theme) {
 	    	var index = $scope.selectedThemes.indexOf(theme);
@@ -222,8 +245,6 @@ ttmApp.controller('MainCtrl', [
 			    			if(userThemeId == theme.id) {
 			    				theme.selected = true;
 			    				$scope.selectedThemes.push(theme);
-			    			} else {
-			    				theme.selected = false;
 			    			}
 			    		});
 		    		});
@@ -249,6 +270,23 @@ ttmApp.controller('MainCtrl', [
 	    		if(!res.code) {
 	    			$scope.user = res.result;
 	    			// $scope.selectedThemes = $scope.user.themes;
+	    		} else {
+	    			console.log(res);
+	    		}
+	    	});
+	    }
+
+	    // ---------------------------------------------------------
+	    // --------------- Part on losers --------------------------
+	    // ---------------------------------------------------------
+
+	    $scope.loadLosers = function() {
+	    	console.log("loadLosers");
+	    	ttmStorageApi.losers(function(res) {
+	    		if(!res.code) {
+	    			console.log("getting losers");
+	    			$scope.losers = res.result;
+	    			// $scope.$apply();
 	    		} else {
 	    			console.log(res);
 	    		}

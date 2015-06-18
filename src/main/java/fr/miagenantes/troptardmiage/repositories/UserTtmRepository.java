@@ -55,12 +55,14 @@ public class UserTtmRepository {
         	events = user.getSubscriptions();
         	missedEvt = 0;
         	totalEvt = events.size();
-        	for(Map.Entry<String, Boolean> event : events.entrySet()) {
-        		if(!event.getValue()) {
-        			missedEvt++;
-        		}
+        	if(totalEvt>0) {
+	        	for(Map.Entry<String, Boolean> event : events.entrySet()) {
+	        		if(!event.getValue()) {
+	        			missedEvt++;
+	        		}
+	        	}
+	        	classement.put(user.getUser().getNickname(), ((double) missedEvt/(double) totalEvt)*100);
         	}
-        	classement.put(user.getUser().getNickname(), ((double) missedEvt/(double) totalEvt)*100);
         }
         classementTrie.putAll(classement);
         

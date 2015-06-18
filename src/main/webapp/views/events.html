@@ -7,13 +7,13 @@
                     <h3 class="section-subheading text-muted text-center">Vous trouverez tous les événements qui pourraient vous intéresser !<br/>Inscrivez-vous et vous recevrez une notification la veille de l'événement.</h3>
 
                     <p ng-show="events.length == 0 && selectedThemes.length == 0" class="text-info text-center">Choisissez vos préférences et nous vous proposerons des événements !</p>
-                    <p ng-show="events.length == 0 && selectedThemes.length > 0" class="text-info text-center">Désolé, il n'y a aucun événement correspond à vos préférences !</p>
-                    <ul class="timeline" ng-repeat="event in events">
-                        <li>
+                    <p ng-show="events.length == 0 && selectedThemes.length > 0" class="text-info text-center">Désolé, il n'y a aucun événement correspondant à vos préférences !</p>
+                    <ul class="timeline">
+                        <li ng-repeat="event in events track by event.eventId">
                             <div class="timeline-image">
                                 <img class="img-circle img-responsive" ng-src="{{event.image || event.category[event.category.length-1].icon}}" alt="">
                             </div>
-                            <div class="timeline-panel">
+                            <div class="timeline-panel" id="{{event.eventId}}">
                                 <div class="timeline-heading">
                                     <h4 ng-bind="event.title"></h4>
                                     <h5 class="subheading">
@@ -25,7 +25,8 @@
                                     <p class="text-muted" ng-bind="event.line2"></p>
                                     <p class="text-info" ng-bind="event.line3"></p>
                                 </div>
-                                 <button type="button" class="btn btn-primary" ng-click="subscribe(event)"><i class="fa fa-check"></i> S'inscrire</button>
+                                 <button type="button" class="btn btn-primary" ng-click="subscribe(event)" ng-show="!event.subscribed"><i class="fa fa-check"></i> S'inscrire</button>
+                                 <button type="button" class="btn btn-danger" ng-click="unsubscribe(event)" ng-show="event.subscribed"><i class="fa fa-times"></i> Se désinscrire</button>
                             </div>
                         </li>
                     </ul>
@@ -36,8 +37,8 @@
                     <h3 class="section-subheading text-muted text-center titre-high-score">Plus vous grimpez dans le classement en ratant les événements, plus vous êtes un loser ! </h3>
                     <button type="button" class="btn btn-primary center-block" ng-click="loadLosers()"><i class="fa fa-refresh"></i></button>
 
-                    <ul class="high-score" ng-repeat="(key, percentage) in losers | limitTo:3">
-                        <li>
+                    <ul class="high-score">
+                        <li ng-repeat="(key, percentage) in losers | limitTo:3">
                             <img ng-src="styles/img/citron-{{$index + 1}}.png">
                                 <span>
                                     <h4 class="subheading titre-min-cent" ng-bind="key"></h4><br/>

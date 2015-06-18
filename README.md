@@ -64,6 +64,12 @@ _Exemple :_
 
 _Si Eclipse a rajouté des fichiers (.project, .classpath, etc...), spécifier à Git de ne pas les inclure dans le .gitignore_
 
+## Reste à faire
+- Réaliser des filtres sur les événements
+- Indiquer le chargement par un spin ou équivalent
+- Permettre de voir la liste de ses inscriptions
+- Afficher des messages d'erreur en cas d'incidents
+
 [0]: https://troptardmiage.appspot.com
 [1]: https://developers.google.com/appengine
 [2]: http://java.com/en/
