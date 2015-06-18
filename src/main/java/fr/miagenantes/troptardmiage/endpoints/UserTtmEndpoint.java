@@ -133,4 +133,16 @@ public class UserTtmEndpoint {
 		}
 		return UserTtmRepository.getInstance().unsubscribe(user.getUserId(), eventId);
 	}
+
+	@ApiMethod(
+		name = "users.confirmEvent",
+		path = "users/confirmEvent/{eventId}",
+		httpMethod = HttpMethod.POST
+	)
+	public UserTtm confirmEvent(User user, @Named("eventId") String eventId) throws OAuthRequestException {
+		if (user == null) {
+			throw new OAuthRequestException(authMessage);
+		}
+		return UserTtmRepository.getInstance().confirmEvent(user.getUserId(), eventId);
+	}
 }

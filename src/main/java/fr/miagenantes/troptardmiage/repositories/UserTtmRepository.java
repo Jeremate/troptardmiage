@@ -68,6 +68,10 @@ public class UserTtmRepository {
         
         return classementTrie;
     }
+    
+    public List<UserTtm> list() {
+    	return ofy().load().type(UserTtm.class).list();
+    }
 
     public UserTtm create(UserTtm userTtm) {
     	UserTtm existingUser = get(userTtm.getId());
@@ -129,7 +133,7 @@ public class UserTtmRepository {
 		String pattern = "dd-MM-yy";
 		Date start = new SimpleDateFormat(pattern).parse(startDate);
 		Date end = new SimpleDateFormat(pattern).parse(endDate);
-		Event evt = EventRepository.getInstance().create(new Event(eventId, title, theme, start, end, city, new GeoPt(latitude, longitude)));
+		Event evt = EventRepository.getInstance().create(new Event(eventId, title, themeId, start, end, city, new GeoPt(latitude, longitude)));
 		//save user's will to go to this event
 		userTtm.getSubscriptions().put(evt.getId(), Boolean.FALSE);
 		//save Event ID into the list of themes
@@ -151,4 +155,13 @@ public class UserTtmRepository {
 		return userTtm;
 	}
  
+    public UserTtm confirmEvent(String userId, String eventId) {
+        UserTtm userTtm = get(userId);
+        Event evt = EventRepository.getInstance().get(eventId);
+        userTtm.confirmEvent(evt.getId());
+        
+        ofy().save().entity(userTtm).now();
+        
+        return userTtm;
+    }
 }

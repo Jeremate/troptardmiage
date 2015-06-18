@@ -2,7 +2,6 @@ package fr.miagenantes.troptardmiage.models;
 
 import java.util.Date;
 
-import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Load;
@@ -14,7 +13,7 @@ public class Event {
 	private String id;
 	private String title;
 	@Load
-	private Ref<Theme> theme;
+	private String themeId;
 	private Date startDate;
 	private Date endDate;
 	private String city;
@@ -22,11 +21,11 @@ public class Event {
 
 	//constructors
 	public Event() {} //must have no-arg constructor in Objectify
-	public Event(String eventId, String title, Theme theme,
+	public Event(String eventId, String title, String themeId,
 			Date startDate, Date endDate, String city, GeoPt geoPt) {
 		this.id = eventId;
 		this.title = title;
-		this.theme = Ref.create(theme);
+		this.themeId = themeId;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.city = city;
@@ -48,11 +47,11 @@ public class Event {
 		this.title = title;
 		return this;
 	}
-	public Theme getTheme() {
-		return theme.get();
+	public String getTheme() {
+		return themeId;
 	}
-	public Event setTheme(Theme theme) {
-		this.theme = Ref.create(theme);
+	public Event setTheme(String themeId) {
+		this.themeId = themeId;
 		return this;
 	}
 	public Date getStartDate() {

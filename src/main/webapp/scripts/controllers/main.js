@@ -276,6 +276,7 @@ ttmApp.controller('MainCtrl', [
 	    	});
 	    }
 
+<<<<<<< HEAD
 	    // ---------------------------------------------------------
 	    // --------------- Part on losers --------------------------
 	    // ---------------------------------------------------------
@@ -290,6 +291,14 @@ ttmApp.controller('MainCtrl', [
 	    		} else {
 	    			console.log(res);
 	    		}
+=======
+	    $scope.confirmEvent = function(event) {
+	    	console.log("confirmEvent");
+	    	ttmStorageApi.confirmEvent(event, function(res) {
+	    		console.log(res);
+	    		if(!res.code) {}
+	    		// $scope.user = res.result;
+>>>>>>> 78a45b2fad28bb6d765d9e7d8999cef39871e5d1
 	    	});
 	    }
 	}]);
