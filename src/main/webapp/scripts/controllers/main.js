@@ -81,6 +81,7 @@ ttmApp.controller('MainCtrl', [
 				} else {
 					//User is not signed in
 					console.log("User not signed in");
+					$state.go("welcome");
 				}
 			});
 	    }
