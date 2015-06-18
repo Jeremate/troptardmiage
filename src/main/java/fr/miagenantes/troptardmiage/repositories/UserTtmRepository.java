@@ -60,7 +60,7 @@ public class UserTtmRepository {
         			missedEvt++;
         		}
         	}
-        	classement.put(user.getUser().getNickname(), ((double) missedEvt/(double) totalEvt));
+        	classement.put(user.getUser().getNickname(), ((double) missedEvt/(double) totalEvt)*100);
         }
         classementTrie.putAll(classement);
         
@@ -69,11 +69,11 @@ public class UserTtmRepository {
 
     public UserTtm create(UserTtm userTtm) {
     	UserTtm existingUser = get(userTtm.getId());
-    	
     	if(existingUser == null) {
     		ofy().save().entity(userTtm).now();
+    		return userTtm;
     	}
-        return userTtm;
+        return existingUser;
     }
 
     public void remove(String id) {
@@ -91,6 +91,21 @@ public class UserTtmRepository {
     	userTtm.getThemes().add(theme.getId());
     	//assign the user ID to the theme's users list
     	theme.getUsers().add(userId);
+    	
+    	ofy().save().entity(theme).now();
+    	ofy().save().entity(userTtm).now();
+    	
+    	return userTtm;
+    }
+    
+    public UserTtm removeTheme(String userId, String themeId) {
+    	UserTtm userTtm = get(userId);
+    	//we create the Entity Theme (if it already exists, we get the existing Entity)
+    	Theme theme = ThemeRepository.getInstance().get(themeId);
+    	//assign the theme ID to the user's themes list
+    	userTtm.getThemes().remove(theme.getId());
+    	//assign the user ID to the theme's users list
+    	theme.getUsers().remove(userId);
     	
     	ofy().save().entity(theme).now();
     	ofy().save().entity(userTtm).now();

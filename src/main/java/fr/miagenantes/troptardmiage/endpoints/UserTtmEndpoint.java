@@ -90,6 +90,20 @@ public class UserTtmEndpoint {
 	}
 
 	@ApiMethod(
+			name = "users.removeTheme",
+			path = "users/themes",
+			httpMethod = HttpMethod.DELETE
+		)
+		public UserTtm removeTheme(User user, @Named("id") String themeId)
+				throws OAuthRequestException {
+			if (user == null) {
+				throw new OAuthRequestException(authMessage);
+			}
+			return UserTtmRepository.getInstance()
+					.removeTheme(user.getUserId(), themeId);
+		}
+	
+	@ApiMethod(
 		name = "users.subscribe",
 		path = "users/events",
 		httpMethod = HttpMethod.POST
