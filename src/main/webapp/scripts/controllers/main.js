@@ -5,12 +5,13 @@ ttmApp.controller('MainCtrl', [
 
 		//variables
 		ttmStorageApi.isBackendReady = false;
-		$scope.user = {};
+		$scope.user = {};// the user connected
 		$scope.signedIn = false;
-		$scope.themes = [];
-		$scope.selectedThemes = [];
-		$scope.events = [];
-		$scope.losers = [];
+		$scope.themes = []; // themes from the API Loire Atlantique
+		$scope.selectedThemes = []; // selected themes = preferences
+		$scope.previousSelectedThemes = [];// themes that were selected before new change in preferences
+		$scope.events = []; // events from the API Loire Altantique
+		$scope.losers = []; // top losers
 
 		// Constantes pour GAPI
 		var CLIENT_ID = "679411653009-62udgm0l3010dqbhon9lrff7pcqldrg9.apps.googleusercontent.com";
@@ -74,9 +75,9 @@ ttmApp.controller('MainCtrl', [
 					$scope.myUser();
 					$scope.loadODThemes();
 					$scope.loadLosers();
-					//TODO : ajouter les thèmes du user au $scope.selectedThemes
 				  // User is signed in, redirect to events
 				  	$state.go("events");
+				  	// $scope.$apply();
 				} else {
 					//User is not signed in
 					console.log("User not signed in");
@@ -143,7 +144,7 @@ ttmApp.controller('MainCtrl', [
 	    		} else {
 	    			console.log(res);
 	    		}
-	    	})
+	    	});
 	    }
 
 	    $scope.unsubscribe = function(event) {
@@ -152,7 +153,7 @@ ttmApp.controller('MainCtrl', [
 	    		console.log(res);
 	    		if(!res.code) {}
 	    		$scope.user = res.result;
-	    	})
+	    	});
 	    }
 
 	    $scope.loadLosers = function() {
@@ -185,26 +186,49 @@ ttmApp.controller('MainCtrl', [
 	    		$scope.selectedThemes.push(theme);
 	    		addUserTheme(theme);
 	    	}
+	    	theme.selected = !theme.selected;
 	    }
 
 	    $scope.cancelSelectedThemes = function() {
 	    	console.log("cancelSelectedThemes");
-	    	console.log($scope.user);
-	    	console.log($scope.user.hasOwnProperty("themes"));
-	    	if($scope.user.hasOwnProperty("themes")) {
-	    		$scope.selectedThemes = $scope.user.themes;
-	    	} else {
-	    		$scope.selectedThemes = [];
-	    	}
+	    	angular.forEach($scope.selectedThemes, function(value, key){
+	    		removeUserTheme(value);
+	    	});
+	    	angular.forEach($scope.previousSelectedThemes, function(value, key){
+	    		addUserTheme(value);
+	    	});
+	    	$scope.preSelectThemes();
 	    }
 
 	    $scope.validateSelectedThemes = function() {
 	    	console.log("validateSelectedThemes");
 	    	// console.log($scope.user);
 	    	$scope.events = [];
+	    	$scope.previousSelectedThemes = [];
 	    	angular.forEach($scope.selectedThemes, function(value, key){
+	    		$scope.previousSelectedThemes.push(value);
 	    		$scope.loadODEvents(value.id);
 	    	});
+	    }
+
+	    $scope.preSelectThemes = function() {
+	    	$scope.selectedThemes = [];
+	    	if($scope.user.hasOwnProperty("themes")) {
+		    	angular.forEach($scope.themes, function(themeMere, key){
+		    		angular.forEach(themeMere.children, function(theme, key){
+		    			angular.forEach($scope.user.themes, function(userThemeId, key){
+			    			// console.log(userThemeId+" == "+theme.id+" : ");
+			    			// console.log(userThemeId == theme.id);
+			    			if(userThemeId == theme.id) {
+			    				theme.selected = true;
+			    				$scope.selectedThemes.push(theme);
+			    			} else {
+			    				theme.selected = false;
+			    			}
+			    		});
+		    		});
+		    	});
+		    }
 	    }
 
 	    var addUserTheme = function(theme) {
