@@ -11,22 +11,19 @@ public class Theme {
 	@Id
 	private String id;
 	private String name;
-	private String icon;
 	private Set<String> events = new HashSet<String>();
 	private Set<String> users = new HashSet<String>();;
 
 	//constructors
 	public Theme() {} //must have no-arg constructor in Objectify
-	public Theme(String themeId, String name, String icon) {
+	public Theme(String themeId, String name) {
 		this.id = themeId;
 		this.name = name;
-		this.icon = icon;
 	}
-	public Theme(String themeId, String name, String icon,
+	public Theme(String themeId, String name,
 			Set<String> events, Set<String> users) {
 		this.id = themeId;
 		this.name = name;
-		this.icon = icon;
 		this.events = events;
 		this.users = users;
 	}
@@ -44,13 +41,6 @@ public class Theme {
 	}
 	public Theme setName(String name) {
 		this.name = name;
-		return this;
-	}
-	public String getIcon() {
-		return icon;
-	}
-	public Theme setIcon(String icon) {
-		this.icon = icon;
 		return this;
 	}
 	public Set<String> getEvents() {

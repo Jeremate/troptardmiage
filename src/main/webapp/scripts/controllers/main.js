@@ -311,6 +311,7 @@ ttmApp.controller('MainCtrl', [
 	    	ttmStorageApi.losers(function(res) {
 	    		if(!res.code) {
 	    			console.log("getting losers");
+	    			console.log(res);
 	    			$scope.losers = res.result;
 	    			// $scope.$apply();
 	    		} else {

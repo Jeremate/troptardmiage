@@ -80,13 +80,13 @@ public class UserTtmEndpoint {
 		httpMethod = HttpMethod.POST
 	)
 	public UserTtm addTheme(User user, @Named("id") String themeId,
-			@Named("name") String name, @Named("icon") String icon)
+			@Named("name") String name)
 			throws OAuthRequestException {
 		if (user == null) {
 			throw new OAuthRequestException(authMessage);
 		}
 		return UserTtmRepository.getInstance()
-				.addTheme(user.getUserId(), new Theme(themeId, name, icon));
+				.addTheme(user.getUserId(), new Theme(themeId, name));
 	}
 
 	@ApiMethod(
