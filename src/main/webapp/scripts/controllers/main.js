@@ -312,7 +312,7 @@ ttmApp.controller('MainCtrl', [
 	    	ttmStorageApi.losers(function(res) {
 	    		if(!res.code) {
 	    			console.log("getting losers");
-	    			console.log(res);
+	    			// console.log(res);
 	    			angular.forEach(res.result, function(value, key){
 	    				if(angular.isNumber(value)) {
 	    					$scope.losers.push({
