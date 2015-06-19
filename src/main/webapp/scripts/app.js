@@ -30,7 +30,7 @@ ttmApp.config(function ($stateProvider, $urlRouterProvider) {
     })
 
     .state('confirm-event', {
-       url: '/confirm-event',
+       url: '/events/{eventId}/confirm',
        views: {
             '': {
                 templateUrl: 'views/confirmevent.html'

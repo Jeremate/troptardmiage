@@ -38,11 +38,11 @@
                     <button type="button" class="btn btn-primary center-block" ng-click="loadLosers()"><i class="fa fa-refresh"></i></button>
 
                     <ul class="high-score">
-                        <li ng-repeat="(key, percentage) in losers | limitTo:3">
+                        <li ng-repeat="loser in losers | limitTo:3">
                             <img ng-src="styles/img/citron-{{$index + 1}}.png">
                                 <span>
-                                    <h4 class="subheading titre-min-cent" ng-bind="key"></h4><br/>
-                                    <p class="text-muted"><span ng-bind="percentage"></span> % d'événements ratés</p>
+                                    <h4 class="subheading titre-min-cent" ng-bind="loser.name"></h4><br/>
+                                    <p class="text-muted"><span ng-bind="loser.percentage"></span> % d'événements ratés</p>
                                 </span>
                         </li>
                     </ul>
