@@ -3,6 +3,6 @@
   <cron>
     <url>/cron/cronjobmail</url>
     <description>Envoie une demande de localisation par e-mail aux utilisateurs qui ont un evenement en cours</description>
-    <schedule>every 5 minutes</schedule>
+    <schedule>every day 10:00</schedule>
   </cron>
 </cronentries>
