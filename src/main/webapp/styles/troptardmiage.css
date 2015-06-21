@@ -223,6 +223,10 @@ div h3.section-subheading {
     width: 45px;
 }
 
+.alertdisplay > div:first-child {
+  margin-top: 30px;
+}
+
 .timeline-image > img {
     display: block;
     height: inherit;
