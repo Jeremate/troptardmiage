@@ -9,7 +9,7 @@ Projet M1 Miage en AngularJS et services REST via Google App Engine en Java
 2. Une liste d'événements lui est proposé pour lesquels il peut s'inscrire
 3. Au moment d'un événement, le système le notifie et lui demande sa position
 4. Le système garde une trace des événements assistés
-5. Le système établie un classement des meilleurs losers
+5. Le système établit un classement des meilleurs losers
 
 ## Products
 - [App Engine][1]
